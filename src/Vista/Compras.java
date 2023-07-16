@@ -24,6 +24,10 @@ public class Compras extends javax.swing.JPanel {
         btnVentas = new javax.swing.JPanel();
         lblVentas = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
+        btnNuevo = new javax.swing.JPanel();
+        nuevo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaCompras = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -145,6 +149,47 @@ public class Compras extends javax.swing.JPanel {
         lblTitulo.setMinimumSize(new java.awt.Dimension(210, 28));
         lblTitulo.setPreferredSize(new java.awt.Dimension(210, 28));
 
+        btnNuevo.setMaximumSize(new java.awt.Dimension(100, 42));
+        btnNuevo.setMinimumSize(new java.awt.Dimension(100, 42));
+
+        nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/btnNuevo.png"))); // NOI18N
+
+        javax.swing.GroupLayout btnNuevoLayout = new javax.swing.GroupLayout(btnNuevo);
+        btnNuevo.setLayout(btnNuevoLayout);
+        btnNuevoLayout.setHorizontalGroup(
+            btnNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(nuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        btnNuevoLayout.setVerticalGroup(
+            btnNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(nuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(816, 350));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(816, 350));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(816, 350));
+
+        tablaCompras.setFont(new java.awt.Font("SF UI Display", 0, 17)); // NOI18N
+        tablaCompras.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "PROVEEDOR", "FECHA", "TOTAL"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaCompras.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablaCompras);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,6 +199,12 @@ public class Compras extends javax.swing.JPanel {
                 .addGap(80, 80, 80)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +212,11 @@ public class Compras extends javax.swing.JPanel {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(508, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -202,10 +257,14 @@ public class Compras extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCompras;
+    private javax.swing.JPanel btnNuevo;
     private javax.swing.JPanel btnVentas;
     private javax.swing.JPanel jPanel6;
+    public static javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCompras;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblVentas;
+    private javax.swing.JLabel nuevo;
+    public static javax.swing.JTable tablaCompras;
     // End of variables declaration//GEN-END:variables
 }

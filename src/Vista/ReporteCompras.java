@@ -47,11 +47,13 @@ public class ReporteCompras extends javax.swing.JPanel {
         btnReportesVentas = new javax.swing.JPanel();
         lblVentas = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaCompras = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        setMaximumSize(new java.awt.Dimension(970, 620));
-        setMinimumSize(new java.awt.Dimension(970, 620));
+        setMaximumSize(new java.awt.Dimension(980, 620));
+        setMinimumSize(new java.awt.Dimension(980, 620));
 
         jPanel6.setBackground(new java.awt.Color(53, 66, 89));
         jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -212,6 +214,31 @@ public class ReporteCompras extends javax.swing.JPanel {
         lblTitulo.setMinimumSize(new java.awt.Dimension(210, 28));
         lblTitulo.setPreferredSize(new java.awt.Dimension(210, 28));
 
+        jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(816, 400));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(816, 400));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(816, 400));
+
+        tablaCompras.setFont(new java.awt.Font("SF UI Display", 0, 17)); // NOI18N
+        tablaCompras.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "PROVEEDOR", "PRODUCTO", "CANTIDAD", "PRECIO"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaCompras.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablaCompras);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,7 +246,9 @@ public class ReporteCompras extends javax.swing.JPanel {
             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(80, 80, 80)
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -228,7 +257,9 @@ public class ReporteCompras extends javax.swing.JPanel {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 508, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -319,9 +350,11 @@ public class ReporteCompras extends javax.swing.JPanel {
     private javax.swing.JPanel btnReportesCompras;
     private javax.swing.JPanel btnReportesVentas;
     private javax.swing.JPanel jPanel6;
+    public static javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCompras;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTrabajadores;
     private javax.swing.JLabel lblVentas;
+    public static javax.swing.JTable tablaCompras;
     // End of variables declaration//GEN-END:variables
 }
