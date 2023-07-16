@@ -48,7 +48,7 @@ public class trabajadorConsulta {
     public Modelo.trabajador datosTrabajadorID(int id_trabajador){
         Modelo.trabajador modeloTrabajador = new trabajador();
         
-        String sql = "SELECT * FROM trabajdor WHERE id_trabajador=?";
+        String sql = "SELECT * FROM trabajador WHERE id_trabajador=?";
         
         try {
             acce = con.conectardb();
