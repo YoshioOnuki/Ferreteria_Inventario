@@ -95,8 +95,8 @@ public class productoConsulta {
         return modeloProducto;
     }
     
-    //Obtenemos la cantidad de un producto
-    public int cantidadProducto(int id_producto){
+    //Obtenemos la stock de un producto
+    public int StockProducto(int id_producto){
         int r = 0;
         
         String msql = "SELECT producto_stock FROM producto WHERE id_producto=?";
@@ -288,5 +288,65 @@ public class productoConsulta {
         } catch (Exception e) {
             System.out.println("Error al cargar el combo de productos: " + e);
         }
+    }
+    
+    public int cantidadProductos(){
+        int r = 0;
+        
+        String sql = "SELECT count(id_producto) FROM producto";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                r = rs.getInt(1);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener la cantidad de productos:  " + e);
+        }
+        
+        return r;
+    }
+    
+    public int cantidadProductosComprados(){
+        int r = 0;
+        
+        String sql = "SELECT SUM(detalle_compra_cantidad) FROM detalle_compra";
+   
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                r = rs.getInt(1);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error obtener la cantidad de productos comprados: " + e);
+        }
+
+        return r;
+    }
+    
+    public int cantidadProductosVendidos(){
+        int r = 0;
+        
+        String sql = "SELECT SUM(detalle_venta_cantidad) FROM detalle_venta";
+   
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                r = rs.getInt(1);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error obtener la cantidad de productos vendidos: " + e);
+        }
+
+        return r;
     }
 }

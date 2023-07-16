@@ -53,4 +53,24 @@ public class usuarioConsulta {
         
         return modeloUsuario;
     }
+    
+    public int cantidadUsuarios(){
+        int r = 0;
+        
+        String sql = "SELECT count(id_usuario) FROM usuario";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                r = rs.getInt(1);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener la cantidad de usuarios:  " + e);
+        }
+        
+        return r;
+    }
 }

@@ -113,4 +113,24 @@ public class proveedorConsulta {
         return r;
     }
     
+    public int cantidadProveedores(){
+        int r = 0;
+        
+        String sql = "SELECT count(id_proveedor) FROM proveedor";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                r = rs.getInt(1);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener la cantidad de proveedores:  " + e);
+        }
+        
+        return r;
+    }
+    
 }

@@ -182,4 +182,24 @@ public class clienteConsulta {
         
         return r;
     }
+    
+    public int cantidadClientes(){
+        int r = 0;
+        
+        String sql = "SELECT count(id_cliente) FROM cliente";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                r = rs.getInt(1);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener la cantidad de clientes:  " + e);
+        }
+        
+        return r;
+    }
 }

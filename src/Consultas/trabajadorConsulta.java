@@ -70,4 +70,24 @@ public class trabajadorConsulta {
         return modeloTrabajador;
     }
     
+    public int cantidadTrabajadores(){
+        int r = 0;
+        
+        String sql = "SELECT count(id_trabajador) FROM trabajador";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                r = rs.getInt(1);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener la cantidad de trabajadores:  " + e);
+        }
+        
+        return r;
+    }
+    
 }

@@ -7,9 +7,9 @@ import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-public class Usuarios extends javax.swing.JPanel {
+public class Proveedor extends javax.swing.JPanel {
 
-    public Usuarios() {
+    public Proveedor() {
         initComponents();
     }
     
@@ -46,7 +46,7 @@ public class Usuarios extends javax.swing.JPanel {
         lblTitulo.setFont(new java.awt.Font("SF UI Display", 1, 26)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(24, 28, 50));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Usuarios");
+        lblTitulo.setText("Proveedor");
         lblTitulo.setMaximumSize(new java.awt.Dimension(210, 28));
         lblTitulo.setMinimumSize(new java.awt.Dimension(210, 28));
         lblTitulo.setPreferredSize(new java.awt.Dimension(210, 28));
@@ -58,7 +58,7 @@ public class Usuarios extends javax.swing.JPanel {
             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(80, 80, 80)
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

@@ -7,9 +7,9 @@ import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-public class Clientes extends javax.swing.JPanel {
+public class Ventas extends javax.swing.JPanel {
 
-    public Clientes() {
+    public Ventas() {
         initComponents();
     }
     
@@ -19,9 +19,9 @@ public class Clientes extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel6 = new javax.swing.JPanel();
-        btnTrabajadores = new javax.swing.JPanel();
+        btnCompras = new javax.swing.JPanel();
         lblTrabajadores = new javax.swing.JLabel();
-        btnClientes = new javax.swing.JPanel();
+        btnVentas = new javax.swing.JPanel();
         lblVentas = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
 
@@ -36,84 +36,84 @@ public class Clientes extends javax.swing.JPanel {
         jPanel6.setMinimumSize(new java.awt.Dimension(970, 40));
         jPanel6.setPreferredSize(new java.awt.Dimension(970, 40));
 
-        btnTrabajadores.setBackground(new java.awt.Color(53, 66, 89));
-        btnTrabajadores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnTrabajadores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTrabajadores.setMaximumSize(new java.awt.Dimension(200, 40));
-        btnTrabajadores.setMinimumSize(new java.awt.Dimension(200, 40));
-        btnTrabajadores.setPreferredSize(new java.awt.Dimension(200, 40));
-        btnTrabajadores.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCompras.setBackground(new java.awt.Color(53, 66, 89));
+        btnCompras.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCompras.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnCompras.setMinimumSize(new java.awt.Dimension(200, 40));
+        btnCompras.setPreferredSize(new java.awt.Dimension(200, 40));
+        btnCompras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTrabajadoresMouseClicked(evt);
+                btnComprasMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnTrabajadoresMouseEntered(evt);
+                btnComprasMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnTrabajadoresMouseExited(evt);
+                btnComprasMouseExited(evt);
             }
         });
 
         lblTrabajadores.setFont(new java.awt.Font("SF UI Display", 1, 16)); // NOI18N
         lblTrabajadores.setForeground(new java.awt.Color(255, 255, 255));
         lblTrabajadores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTrabajadores.setText("Trabajadores");
+        lblTrabajadores.setText("Compras");
         lblTrabajadores.setMaximumSize(new java.awt.Dimension(210, 28));
         lblTrabajadores.setMinimumSize(new java.awt.Dimension(210, 28));
         lblTrabajadores.setPreferredSize(new java.awt.Dimension(210, 28));
 
-        javax.swing.GroupLayout btnTrabajadoresLayout = new javax.swing.GroupLayout(btnTrabajadores);
-        btnTrabajadores.setLayout(btnTrabajadoresLayout);
-        btnTrabajadoresLayout.setHorizontalGroup(
-            btnTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnTrabajadoresLayout.createSequentialGroup()
+        javax.swing.GroupLayout btnComprasLayout = new javax.swing.GroupLayout(btnCompras);
+        btnCompras.setLayout(btnComprasLayout);
+        btnComprasLayout.setHorizontalGroup(
+            btnComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnComprasLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(lblTrabajadores, javax.swing.GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        btnTrabajadoresLayout.setVerticalGroup(
-            btnTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        btnComprasLayout.setVerticalGroup(
+            btnComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblTrabajadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        btnClientes.setBackground(new java.awt.Color(221, 107, 77));
-        btnClientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        btnClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnClientes.setMaximumSize(new java.awt.Dimension(200, 40));
-        btnClientes.setMinimumSize(new java.awt.Dimension(200, 40));
-        btnClientes.setPreferredSize(new java.awt.Dimension(200, 40));
-        btnClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnVentas.setBackground(new java.awt.Color(221, 107, 77));
+        btnVentas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVentas.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnVentas.setMinimumSize(new java.awt.Dimension(200, 40));
+        btnVentas.setPreferredSize(new java.awt.Dimension(200, 40));
+        btnVentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnClientesMouseClicked(evt);
+                btnVentasMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnClientesMouseEntered(evt);
+                btnVentasMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnClientesMouseExited(evt);
+                btnVentasMouseExited(evt);
             }
         });
 
         lblVentas.setFont(new java.awt.Font("SF UI Display", 1, 16)); // NOI18N
         lblVentas.setForeground(new java.awt.Color(255, 255, 255));
         lblVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVentas.setText("Clientes");
+        lblVentas.setText("Ventas");
         lblVentas.setMaximumSize(new java.awt.Dimension(210, 28));
         lblVentas.setMinimumSize(new java.awt.Dimension(210, 28));
         lblVentas.setPreferredSize(new java.awt.Dimension(210, 28));
 
-        javax.swing.GroupLayout btnClientesLayout = new javax.swing.GroupLayout(btnClientes);
-        btnClientes.setLayout(btnClientesLayout);
-        btnClientesLayout.setHorizontalGroup(
-            btnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnClientesLayout.createSequentialGroup()
+        javax.swing.GroupLayout btnVentasLayout = new javax.swing.GroupLayout(btnVentas);
+        btnVentas.setLayout(btnVentasLayout);
+        btnVentasLayout.setHorizontalGroup(
+            btnVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnVentasLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        btnClientesLayout.setVerticalGroup(
-            btnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnClientesLayout.createSequentialGroup()
+        btnVentasLayout.setVerticalGroup(
+            btnVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnVentasLayout.createSequentialGroup()
                 .addComponent(lblVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
@@ -123,24 +123,24 @@ public class Clientes extends javax.swing.JPanel {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(btnTrabajadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 571, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTrabajadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lblTitulo.setFont(new java.awt.Font("SF UI Display", 1, 26)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(24, 28, 50));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Clientes");
+        lblTitulo.setText("Ventas");
         lblTitulo.setMaximumSize(new java.awt.Dimension(210, 28));
         lblTitulo.setMinimumSize(new java.awt.Dimension(210, 28));
         lblTitulo.setPreferredSize(new java.awt.Dimension(210, 28));
@@ -152,7 +152,7 @@ public class Clientes extends javax.swing.JPanel {
             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(80, 80, 80)
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -165,43 +165,43 @@ public class Clientes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTrabajadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrabajadoresMouseClicked
-        Trabajadores Trabajadores = new Trabajadores();
+    private void btnComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseClicked
+        Compras Compras = new Compras();
             
-        Trabajadores.setSize(new Dimension(970, 620));
-        Trabajadores.setLocation(0,0);
+        Compras.setSize(new Dimension(970, 620));
+        Compras.setLocation(0,0);
         Principal.PanelPrincipal.removeAll();
-        Principal.PanelPrincipal.add(Trabajadores,BorderLayout.CENTER);
+        Principal.PanelPrincipal.add(Compras,BorderLayout.CENTER);
         Principal.PanelPrincipal.revalidate();
         Principal.PanelPrincipal.repaint();
-    }//GEN-LAST:event_btnTrabajadoresMouseClicked
+    }//GEN-LAST:event_btnComprasMouseClicked
 
-    private void btnTrabajadoresMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrabajadoresMouseEntered
-        btnTrabajadores.setBackground(new Color(204, 94, 65));
-    }//GEN-LAST:event_btnTrabajadoresMouseEntered
+    private void btnComprasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseEntered
+        btnCompras.setBackground(new Color(204, 94, 65));
+    }//GEN-LAST:event_btnComprasMouseEntered
 
-    private void btnTrabajadoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrabajadoresMouseExited
-        btnTrabajadores.setBackground(new Color(53, 66, 89));
-    }//GEN-LAST:event_btnTrabajadoresMouseExited
+    private void btnComprasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseExited
+        btnCompras.setBackground(new Color(53, 66, 89));
+    }//GEN-LAST:event_btnComprasMouseExited
 
     
-    private void btnClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseClicked
+    private void btnVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnClientesMouseClicked
+    }//GEN-LAST:event_btnVentasMouseClicked
 
-    private void btnClientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseEntered
+    private void btnVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseEntered
         
-    }//GEN-LAST:event_btnClientesMouseEntered
+    }//GEN-LAST:event_btnVentasMouseEntered
 
-    private void btnClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseExited
-    }//GEN-LAST:event_btnClientesMouseExited
+    private void btnVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseExited
+    }//GEN-LAST:event_btnVentasMouseExited
 
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnClientes;
-    private javax.swing.JPanel btnTrabajadores;
+    private javax.swing.JPanel btnCompras;
+    private javax.swing.JPanel btnVentas;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTrabajadores;

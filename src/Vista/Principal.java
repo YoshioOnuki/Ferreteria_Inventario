@@ -13,6 +13,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 
 
 public class Principal extends javax.swing.JFrame {
@@ -23,7 +24,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("Inventario de Ferreteria Pepito Mori");
+        this.setTitle("Inventario de Ferreteria Mori");
         this.setIconImage(new ImageIcon(getClass().getResource("/Image/Logo.png")).getImage());
         mostrarComponentes();
     }

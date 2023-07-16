@@ -428,6 +428,15 @@ public class SidebarAdmin extends javax.swing.JPanel {
 
     
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
+        Productos Productos = new Productos();
+            
+        Productos.setSize(new Dimension(970, 620));
+        Productos.setLocation(0,0);
+        Principal.PanelPrincipal.removeAll();
+        Principal.PanelPrincipal.add(Productos,BorderLayout.CENTER);
+        Principal.PanelPrincipal.revalidate();
+        Principal.PanelPrincipal.repaint();
+        
         selecTrabajador.setVisible(false);
         selecUsuario.setVisible(false);
         selecProductos.setVisible(true);
@@ -446,6 +455,14 @@ public class SidebarAdmin extends javax.swing.JPanel {
 
     
     private void btnProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedorMouseClicked
+        Proveedor Proveedor = new Proveedor();
+            
+        Proveedor.setSize(new Dimension(970, 620));
+        Proveedor.setLocation(0,0);
+        Principal.PanelPrincipal.removeAll();
+        Principal.PanelPrincipal.add(Proveedor,BorderLayout.CENTER);
+        Principal.PanelPrincipal.revalidate();
+        Principal.PanelPrincipal.repaint();
         
         selecTrabajador.setVisible(false);
         selecUsuario.setVisible(false);
@@ -465,6 +482,14 @@ public class SidebarAdmin extends javax.swing.JPanel {
 
     
     private void btnComprasVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasVentasMouseClicked
+        Compras Compras = new Compras();
+            
+        Compras.setSize(new Dimension(970, 620));
+        Compras.setLocation(0,0);
+        Principal.PanelPrincipal.removeAll();
+        Principal.PanelPrincipal.add(Compras,BorderLayout.CENTER);
+        Principal.PanelPrincipal.revalidate();
+        Principal.PanelPrincipal.repaint();
         
         selecTrabajador.setVisible(false);
         selecUsuario.setVisible(false);

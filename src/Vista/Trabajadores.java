@@ -22,7 +22,8 @@ public class Trabajadores extends javax.swing.JPanel {
         btnTrabajadores = new javax.swing.JPanel();
         lblTrabajadores = new javax.swing.JLabel();
         btnClientes = new javax.swing.JPanel();
-        lblVentas = new javax.swing.JLabel();
+        lblClientes = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -93,13 +94,13 @@ public class Trabajadores extends javax.swing.JPanel {
             }
         });
 
-        lblVentas.setFont(new java.awt.Font("SF UI Display", 1, 16)); // NOI18N
-        lblVentas.setForeground(new java.awt.Color(255, 255, 255));
-        lblVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVentas.setText("Clientes");
-        lblVentas.setMaximumSize(new java.awt.Dimension(210, 28));
-        lblVentas.setMinimumSize(new java.awt.Dimension(210, 28));
-        lblVentas.setPreferredSize(new java.awt.Dimension(210, 28));
+        lblClientes.setFont(new java.awt.Font("SF UI Display", 1, 16)); // NOI18N
+        lblClientes.setForeground(new java.awt.Color(255, 255, 255));
+        lblClientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblClientes.setText("Clientes");
+        lblClientes.setMaximumSize(new java.awt.Dimension(210, 28));
+        lblClientes.setMinimumSize(new java.awt.Dimension(210, 28));
+        lblClientes.setPreferredSize(new java.awt.Dimension(210, 28));
 
         javax.swing.GroupLayout btnClientesLayout = new javax.swing.GroupLayout(btnClientes);
         btnClientes.setLayout(btnClientesLayout);
@@ -107,13 +108,13 @@ public class Trabajadores extends javax.swing.JPanel {
             btnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnClientesLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         btnClientesLayout.setVerticalGroup(
             btnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnClientesLayout.createSequentialGroup()
-                .addComponent(lblVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(lblClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -136,17 +137,31 @@ public class Trabajadores extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lblTitulo.setFont(new java.awt.Font("SF UI Display", 1, 26)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(24, 28, 50));
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("Trabajadores");
+        lblTitulo.setMaximumSize(new java.awt.Dimension(210, 28));
+        lblTitulo.setMinimumSize(new java.awt.Dimension(210, 28));
+        lblTitulo.setPreferredSize(new java.awt.Dimension(210, 28));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 576, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(508, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -189,7 +204,8 @@ public class Trabajadores extends javax.swing.JPanel {
     private javax.swing.JPanel btnClientes;
     private javax.swing.JPanel btnTrabajadores;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel lblClientes;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTrabajadores;
-    private javax.swing.JLabel lblVentas;
     // End of variables declaration//GEN-END:variables
 }
