@@ -17,7 +17,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 public class Dashboard extends javax.swing.JPanel {
     
@@ -55,10 +54,10 @@ public class Dashboard extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         btnDashboard = new javax.swing.JPanel();
         lblTrabajadores = new javax.swing.JLabel();
-        btnRoportesVentas = new javax.swing.JPanel();
-        lblVentas = new javax.swing.JLabel();
         btnReportesCompras = new javax.swing.JPanel();
         lblCompras = new javax.swing.JLabel();
+        btnReportesVentas = new javax.swing.JPanel();
+        lblVentas = new javax.swing.JLabel();
         ReporteProdcutos = new javax.swing.JPanel();
         lblReporteProductos = new javax.swing.JLabel();
         lblCantProductos = new javax.swing.JLabel();
@@ -138,53 +137,12 @@ public class Dashboard extends javax.swing.JPanel {
             .addComponent(lblTrabajadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        btnRoportesVentas.setBackground(new java.awt.Color(53, 66, 89));
-        btnRoportesVentas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRoportesVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRoportesVentas.setMaximumSize(new java.awt.Dimension(200, 40));
-        btnRoportesVentas.setMinimumSize(new java.awt.Dimension(200, 40));
-        btnRoportesVentas.setPreferredSize(new java.awt.Dimension(200, 40));
-        btnRoportesVentas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRoportesVentasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRoportesVentasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRoportesVentasMouseExited(evt);
-            }
-        });
-
-        lblVentas.setFont(new java.awt.Font("SF UI Display", 1, 16)); // NOI18N
-        lblVentas.setForeground(new java.awt.Color(255, 255, 255));
-        lblVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVentas.setText("Reporte de Ventas");
-        lblVentas.setMaximumSize(new java.awt.Dimension(210, 28));
-        lblVentas.setMinimumSize(new java.awt.Dimension(210, 28));
-        lblVentas.setPreferredSize(new java.awt.Dimension(210, 28));
-
-        javax.swing.GroupLayout btnRoportesVentasLayout = new javax.swing.GroupLayout(btnRoportesVentas);
-        btnRoportesVentas.setLayout(btnRoportesVentasLayout);
-        btnRoportesVentasLayout.setHorizontalGroup(
-            btnRoportesVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnRoportesVentasLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        btnRoportesVentasLayout.setVerticalGroup(
-            btnRoportesVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnRoportesVentasLayout.createSequentialGroup()
-                .addComponent(lblVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
-        );
-
         btnReportesCompras.setBackground(new java.awt.Color(53, 66, 89));
         btnReportesCompras.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnReportesCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReportesCompras.setMaximumSize(new java.awt.Dimension(200, 40));
         btnReportesCompras.setMinimumSize(new java.awt.Dimension(200, 40));
+        btnReportesCompras.setPreferredSize(new java.awt.Dimension(200, 40));
         btnReportesCompras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnReportesComprasMouseClicked(evt);
@@ -212,12 +170,53 @@ public class Dashboard extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReportesComprasLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addContainerGap())
         );
         btnReportesComprasLayout.setVerticalGroup(
             btnReportesComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnReportesComprasLayout.createSequentialGroup()
-                .addComponent(lblCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(lblCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+        );
+
+        btnReportesVentas.setBackground(new java.awt.Color(53, 66, 89));
+        btnReportesVentas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnReportesVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportesVentas.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnReportesVentas.setMinimumSize(new java.awt.Dimension(200, 40));
+        btnReportesVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportesVentasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReportesVentasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReportesVentasMouseExited(evt);
+            }
+        });
+
+        lblVentas.setFont(new java.awt.Font("SF UI Display", 1, 16)); // NOI18N
+        lblVentas.setForeground(new java.awt.Color(255, 255, 255));
+        lblVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVentas.setText("Reporte de Ventas");
+        lblVentas.setMaximumSize(new java.awt.Dimension(210, 28));
+        lblVentas.setMinimumSize(new java.awt.Dimension(210, 28));
+        lblVentas.setPreferredSize(new java.awt.Dimension(210, 28));
+
+        javax.swing.GroupLayout btnReportesVentasLayout = new javax.swing.GroupLayout(btnReportesVentas);
+        btnReportesVentas.setLayout(btnReportesVentasLayout);
+        btnReportesVentasLayout.setHorizontalGroup(
+            btnReportesVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReportesVentasLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+        btnReportesVentasLayout.setVerticalGroup(
+            btnReportesVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnReportesVentasLayout.createSequentialGroup()
+                .addComponent(lblVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -228,18 +227,18 @@ public class Dashboard extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(btnDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(btnRoportesVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
                 .addComponent(btnReportesCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(btnReportesVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnRoportesVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnReportesCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnReportesCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnReportesVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -781,13 +780,13 @@ public class Dashboard extends javax.swing.JPanel {
     
     
     
-    private void btnRoportesVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRoportesVentasMouseClicked
-        Ventas Ventas = new Ventas();
+    private void btnReportesComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesComprasMouseClicked
+        ReporteCompras ReporteCompras = new ReporteCompras();
 
-        Ventas.setSize(new Dimension(970, 620));
-        Ventas.setLocation(0,0);
+        ReporteCompras.setSize(new Dimension(970, 620));
+        ReporteCompras.setLocation(0,0);
         Principal.PanelPrincipal.removeAll();
-        Principal.PanelPrincipal.add(Ventas,BorderLayout.CENTER);
+        Principal.PanelPrincipal.add(ReporteCompras,BorderLayout.CENTER);
         Principal.PanelPrincipal.revalidate();
         Principal.PanelPrincipal.repaint();
         
@@ -795,21 +794,8 @@ public class Dashboard extends javax.swing.JPanel {
         selecUsuario.setVisible(false);
         selecProductos.setVisible(false);
         selecProveedor.setVisible(false);
-        selecComprasVentas.setVisible(true);
-        Principal.selecBienvenido.setVisible(false);
-    }//GEN-LAST:event_btnRoportesVentasMouseClicked
-
-    private void btnRoportesVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRoportesVentasMouseEntered
-        btnRoportesVentas.setBackground(new Color(204, 94, 65));
-    }//GEN-LAST:event_btnRoportesVentasMouseEntered
-
-    private void btnRoportesVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRoportesVentasMouseExited
-        btnRoportesVentas.setBackground(new Color(53, 66, 89));
-    }//GEN-LAST:event_btnRoportesVentasMouseExited
-
-    
-    private void btnReportesComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesComprasMouseClicked
-        
+        selecComprasVentas.setVisible(false);
+        Principal.selecBienvenido.setVisible(true);
     }//GEN-LAST:event_btnReportesComprasMouseClicked
 
     private void btnReportesComprasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesComprasMouseEntered
@@ -819,6 +805,33 @@ public class Dashboard extends javax.swing.JPanel {
     private void btnReportesComprasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesComprasMouseExited
         btnReportesCompras.setBackground(new Color(53, 66, 89));
     }//GEN-LAST:event_btnReportesComprasMouseExited
+
+    
+    private void btnReportesVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesVentasMouseClicked
+        ReporteVentas ReporteVentas = new ReporteVentas();
+
+        ReporteVentas.setSize(new Dimension(970, 620));
+        ReporteVentas.setLocation(0,0);
+        Principal.PanelPrincipal.removeAll();
+        Principal.PanelPrincipal.add(ReporteVentas,BorderLayout.CENTER);
+        Principal.PanelPrincipal.revalidate();
+        Principal.PanelPrincipal.repaint();
+        
+        selecTrabajador.setVisible(false);
+        selecUsuario.setVisible(false);
+        selecProductos.setVisible(false);
+        selecProveedor.setVisible(false);
+        selecComprasVentas.setVisible(false);
+        Principal.selecBienvenido.setVisible(true);
+    }//GEN-LAST:event_btnReportesVentasMouseClicked
+
+    private void btnReportesVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesVentasMouseEntered
+        btnReportesVentas.setBackground(new Color(204, 94, 65));
+    }//GEN-LAST:event_btnReportesVentasMouseEntered
+
+    private void btnReportesVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesVentasMouseExited
+        btnReportesVentas.setBackground(new Color(53, 66, 89));
+    }//GEN-LAST:event_btnReportesVentasMouseExited
 
     
     
@@ -1070,7 +1083,7 @@ public class Dashboard extends javax.swing.JPanel {
     private javax.swing.JPanel ReporteVentas;
     private javax.swing.JPanel btnDashboard;
     private javax.swing.JPanel btnReportesCompras;
-    private javax.swing.JPanel btnRoportesVentas;
+    private javax.swing.JPanel btnReportesVentas;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblCantClientes;
     private javax.swing.JLabel lblCantCompras;
