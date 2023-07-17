@@ -1,13 +1,7 @@
 
 package Vista;
 
-import Consultas.clienteConsulta;
 import Consultas.compraConsulta;
-import Consultas.productoConsulta;
-import Consultas.proveedorConsulta;
-import Consultas.trabajadorConsulta;
-import Consultas.usuarioConsulta;
-import Consultas.ventaConsulta;
 import static Vista.SidebarAdmin.selecComprasVentas;
 import static Vista.SidebarAdmin.selecProductos;
 import static Vista.SidebarAdmin.selecProveedor;
@@ -16,24 +10,80 @@ import static Vista.SidebarAdmin.selecUsuario;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 public class ReporteCompras extends javax.swing.JPanel {
     
     
     DefaultTableModel m = new DefaultTableModel();
-    Consultas.clienteConsulta clienteConsulta = new clienteConsulta();
-    Consultas.productoConsulta productoConsulta = new productoConsulta();
-    Consultas.proveedorConsulta proveedorConsulta = new proveedorConsulta();
-    Consultas.trabajadorConsulta trabajadorConsulta = new trabajadorConsulta();
-    Consultas.usuarioConsulta usuarioConsulta = new usuarioConsulta();
     Consultas.compraConsulta compraConsulta = new compraConsulta();
-    Consultas.ventaConsulta ventaConsulta = new ventaConsulta();
     
     public ReporteCompras() {
         initComponents();
+        mostrarReporteCompras();
     }
     
+    void mostrarReporteCompras(){
+        try {
+            m = compraConsulta.consultarReporteCompras();
+            tablaCompras.setModel(m);
+
+            JTableHeader header = tablaCompras.getTableHeader();
+            Font font = header.getFont();
+            header.setFont(font.deriveFont(Font.BOLD, 14f));
+            
+            TableColumn t1 = tablaCompras.getColumn("ID");
+            t1.setPreferredWidth(50);
+            t1.setMaxWidth(50);
+            t1.setMinWidth(50);
+            DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer();
+            centerRenderer1.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t1.setCellRenderer(centerRenderer1);
+            
+            TableColumn t2 = tablaCompras.getColumn("PROVEEDOR");
+            t2.setPreferredWidth(250);
+            t2.setMaxWidth(250);
+            t2.setMinWidth(250);
+            
+            
+            TableColumn t3 = tablaCompras.getColumn("PRODUCTO");
+            t3.setPreferredWidth(226);
+            t3.setMaxWidth(226);
+            t3.setMinWidth(226);
+            
+            TableColumn t4 = tablaCompras.getColumn("CANTIDAD");
+            t4.setPreferredWidth(80);
+            t4.setMaxWidth(80);
+            t4.setMinWidth(80);
+            DefaultTableCellRenderer centerRenderer4 = new DefaultTableCellRenderer();
+            centerRenderer4.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t4.setCellRenderer(centerRenderer4);
+            
+            TableColumn t5 = tablaCompras.getColumn("FECHA");
+            t5.setPreferredWidth(120);
+            t5.setMaxWidth(120);
+            t5.setMinWidth(120);
+            DefaultTableCellRenderer centerRenderer5 = new DefaultTableCellRenderer();
+            centerRenderer5.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t5.setCellRenderer(centerRenderer5);
+            
+            TableColumn t6 = tablaCompras.getColumn("TOTAL");
+            t6.setPreferredWidth(90);
+            t6.setMaxWidth(90);
+            t6.setMinWidth(90);
+            DefaultTableCellRenderer centerRenderer6 = new DefaultTableCellRenderer();
+            centerRenderer6.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t6.setCellRenderer(centerRenderer6);
+            
+            tablaCompras.setRowHeight(25);
+        } catch (Exception e) {
+            System.out.println("Error al listar reporte de compras: " + e);
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -225,11 +275,11 @@ public class ReporteCompras extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "PROVEEDOR", "PRODUCTO", "CANTIDAD", "PRECIO"
+                "ID", "PROVEEDOR", "PRODUCTO", "CANTIDAD", "FECHA", "TOTAL"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -973,11 +973,39 @@ public class Dashboard extends javax.swing.JPanel {
     }//GEN-LAST:event_ReporteProveedoresMouseClicked
 
     private void ReporteProdCompradosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReporteProdCompradosMouseClicked
+        ReporteCompras ReporteCompras = new ReporteCompras();
+            
+        ReporteCompras.setSize(new Dimension(970, 620));
+        ReporteCompras.setLocation(0,0);
+        Principal.PanelPrincipal.removeAll();
+        Principal.PanelPrincipal.add(ReporteCompras,BorderLayout.CENTER);
+        Principal.PanelPrincipal.revalidate();
+        Principal.PanelPrincipal.repaint();
         
+        selecTrabajador.setVisible(false);
+        selecUsuario.setVisible(false);
+        selecProductos.setVisible(false);
+        selecProveedor.setVisible(false);
+        selecComprasVentas.setVisible(false);
+        Principal.selecBienvenido.setVisible(true);
     }//GEN-LAST:event_ReporteProdCompradosMouseClicked
 
     private void ReporteProdVendidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReporteProdVendidosMouseClicked
+        ReporteVentas ReporteVentas = new ReporteVentas();
+            
+        ReporteVentas.setSize(new Dimension(970, 620));
+        ReporteVentas.setLocation(0,0);
+        Principal.PanelPrincipal.removeAll();
+        Principal.PanelPrincipal.add(ReporteVentas,BorderLayout.CENTER);
+        Principal.PanelPrincipal.revalidate();
+        Principal.PanelPrincipal.repaint();
         
+        selecTrabajador.setVisible(false);
+        selecUsuario.setVisible(false);
+        selecProductos.setVisible(false);
+        selecProveedor.setVisible(false);
+        selecComprasVentas.setVisible(false);
+        Principal.selecBienvenido.setVisible(true);
     }//GEN-LAST:event_ReporteProdVendidosMouseClicked
 
     private void ReporteTrabajadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReporteTrabajadoresMouseClicked

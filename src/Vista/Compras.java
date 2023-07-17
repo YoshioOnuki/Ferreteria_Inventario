@@ -1,18 +1,70 @@
 
 package Vista;
 
+import Consultas.compraConsulta;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 public class Compras extends javax.swing.JPanel {
+    
+    DefaultTableModel m = new DefaultTableModel();
+    compraConsulta compraConsulta = new compraConsulta();
 
     public Compras() {
         initComponents();
+        mostrarCompras();
     }
     
+    void mostrarCompras(){
+        try {
+            m = compraConsulta.consultarCompras();
+            tablaCompras.setModel(m);
+
+            JTableHeader header = tablaCompras.getTableHeader();
+            Font font = header.getFont();
+            header.setFont(font.deriveFont(Font.BOLD, 14f));
+            
+            TableColumn t1 = tablaCompras.getColumn("ID");
+            t1.setPreferredWidth(50);
+            t1.setMaxWidth(50);
+            t1.setMinWidth(50);
+            DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer();
+            centerRenderer1.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t1.setCellRenderer(centerRenderer1);
+            
+            TableColumn t2 = tablaCompras.getColumn("PROVEEDOR");
+            t2.setPreferredWidth(500);
+            t2.setMaxWidth(500);
+            t2.setMinWidth(500);
+            
+            
+            TableColumn t3 = tablaCompras.getColumn("FECHA");
+            t3.setPreferredWidth(146);
+            t3.setMaxWidth(146);
+            t3.setMinWidth(146);
+            DefaultTableCellRenderer centerRenderer3 = new DefaultTableCellRenderer();
+            centerRenderer3.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t3.setCellRenderer(centerRenderer3);
+            
+            TableColumn t4 = tablaCompras.getColumn("TOTAL");
+            t4.setPreferredWidth(120);
+            t4.setMaxWidth(120);
+            t4.setMinWidth(120);
+            DefaultTableCellRenderer centerRenderer4 = new DefaultTableCellRenderer();
+            centerRenderer4.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t4.setCellRenderer(centerRenderer4);
+            
+            tablaCompras.setRowHeight(25);
+        } catch (Exception e) {
+            System.out.println("Error al listar compras: " + e);
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

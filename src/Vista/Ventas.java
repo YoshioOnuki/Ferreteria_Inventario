@@ -1,18 +1,75 @@
 
 package Vista;
 
+import Consultas.ventaConsulta;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 public class Ventas extends javax.swing.JPanel {
+    
+    DefaultTableModel m = new DefaultTableModel();
+    ventaConsulta ventaConsulta = new ventaConsulta();
 
     public Ventas() {
         initComponents();
+        mostrarUsuarios();
     }
     
+    void mostrarUsuarios(){
+        try {
+            m = ventaConsulta.consultarVentas();
+            tablaVentas.setModel(m);
+
+            JTableHeader header = tablaVentas.getTableHeader();
+            Font font = header.getFont();
+            header.setFont(font.deriveFont(Font.BOLD, 14f));
+            
+            TableColumn t1 = tablaVentas.getColumn("ID");
+            t1.setPreferredWidth(50);
+            t1.setMaxWidth(50);
+            t1.setMinWidth(50);
+            DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer();
+            centerRenderer1.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t1.setCellRenderer(centerRenderer1);
+            
+            TableColumn t2 = tablaVentas.getColumn("CLIENTE");
+            t2.setPreferredWidth(280);
+            t2.setMaxWidth(280);
+            t2.setMinWidth(280);
+            
+            
+            TableColumn t3 = tablaVentas.getColumn("TRABAJADOR");
+            t3.setPreferredWidth(280);
+            t3.setMaxWidth(280);
+            t3.setMinWidth(280);
+            
+            TableColumn t4 = tablaVentas.getColumn("FECHA");
+            t4.setPreferredWidth(116);
+            t4.setMaxWidth(116);
+            t4.setMinWidth(116);
+            DefaultTableCellRenderer centerRenderer4 = new DefaultTableCellRenderer();
+            centerRenderer4.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t4.setCellRenderer(centerRenderer4);
+            
+            TableColumn t5 = tablaVentas.getColumn("TOTAL");
+            t5.setPreferredWidth(90);
+            t5.setMaxWidth(90);
+            t5.setMinWidth(90);
+            DefaultTableCellRenderer centerRenderer5 = new DefaultTableCellRenderer();
+            centerRenderer5.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t5.setCellRenderer(centerRenderer5);
+            
+            tablaVentas.setRowHeight(25);
+        } catch (Exception e) {
+            System.out.println("Error al listar ventas: " + e);
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
