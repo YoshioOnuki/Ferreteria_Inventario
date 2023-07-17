@@ -10,6 +10,7 @@ import Modelo.cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -201,5 +202,34 @@ public class clienteConsulta {
         }
         
         return r;
+    }
+    
+    public DefaultTableModel consultarClientes(){
+        String [] encabe={"ID","DOCUMENTO","NOMBRE COMPLETO","DIRECCION","CELULAR","CORREO"};
+        DefaultTableModel m = new DefaultTableModel(null, encabe);
+        Object[] o = new Object[6];
+        
+        String sql = "SELECT id_cliente, cliente_documento, cliente_nombre_completo, cliente_direccion, cliente_celular, cliente_email FROM cliente";
+   
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                o[0] = rs.getInt(1);
+                o[1] = rs.getString(2);
+                o[2] = rs.getString(3);
+                o[3] = rs.getString(4);
+                o[4] = rs.getString(5);
+                o[5] = rs.getString(6);
+                
+                m.addRow(o);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("error consultar datos del cliente para una tabla: " + e);
+        }
+
+        return m;
     }
 }

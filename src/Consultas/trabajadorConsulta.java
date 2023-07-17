@@ -10,6 +10,7 @@ import Modelo.trabajador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -88,6 +89,34 @@ public class trabajadorConsulta {
         }
         
         return r;
+    }
+    
+    public DefaultTableModel consultarTrabajadores(){
+        String [] encabe={"ID","NOMBRE COMPLETO","DIRECCION","CELULAR","ESTADO"};
+        DefaultTableModel m = new DefaultTableModel(null, encabe);
+        Object[] o = new Object[5];
+        
+        String sql = "SELECT id_trabajador, trabajador_nombre_completo, trabajador_direccion, trabajador_celular, trabajador_estado FROM trabajador";
+   
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                o[0] = rs.getInt(1);
+                o[1] = rs.getString(2);
+                o[2] = rs.getString(3);
+                o[3] = rs.getString(4);
+                o[4] = rs.getInt(5) == 1 ? "ACTIVO" : "INACTIVO";
+                
+                m.addRow(o);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("error consultar datos del trabajador para una tabla: " + e);
+        }
+
+        return m;
     }
     
 }

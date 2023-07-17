@@ -10,6 +10,7 @@ import Modelo.usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -72,5 +73,33 @@ public class usuarioConsulta {
         }
         
         return r;
+    }
+    
+    public DefaultTableModel consultarUsuarios(){
+        String [] encabe={"ID","USUARIO","TRABAJADOR","ROL","ESTADO"};
+        DefaultTableModel m = new DefaultTableModel(null, encabe);
+        Object[] o = new Object[5];
+        
+        String sql = "SELECT u.id_usuario, u.usuario, t.trabajador_nombre_completo, r.rol, u.usuario_estado FROM usuario u INNER JOIN trabajador t ON t.id_trabajador = u.id_trabajador INNER JOIN rol r ON r.id_rol = u.id_rol";
+   
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                o[0] = rs.getInt(1);
+                o[1] = rs.getString(2);
+                o[2] = rs.getString(3);
+                o[3] = rs.getString(4);
+                o[4] = rs.getInt(5) == 1 ? "ACTIVO" : "INACTIVO";
+                
+                m.addRow(o);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error consultar datos del usuario para una tabla: " + e);
+        }
+
+        return m;
     }
 }

@@ -1,18 +1,79 @@
 
 package Vista;
 
+import Consultas.clienteConsulta;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 public class Clientes extends javax.swing.JPanel {
 
+    DefaultTableModel m = new DefaultTableModel();
+    clienteConsulta clienteConsulta = new clienteConsulta();
+    
     public Clientes() {
         initComponents();
+        mostrarCliente();
     }
     
+    void mostrarCliente(){
+        try {
+            m = clienteConsulta.consultarClientes();
+            tablaClientes.setModel(m);
+
+            JTableHeader header = tablaClientes.getTableHeader();
+            Font font = header.getFont();
+            header.setFont(font.deriveFont(Font.BOLD, 14f));
+            
+            TableColumn t1 = tablaClientes.getColumn("ID");
+            t1.setPreferredWidth(50);
+            t1.setMaxWidth(50);
+            t1.setMinWidth(50);
+            DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer();
+            centerRenderer1.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t1.setCellRenderer(centerRenderer1);
+            
+            TableColumn t2 = tablaClientes.getColumn("DOCUMENTO");
+            t2.setPreferredWidth(100);
+            t2.setMaxWidth(100);
+            t2.setMinWidth(100);
+            DefaultTableCellRenderer centerRenderer2 = new DefaultTableCellRenderer();
+            centerRenderer2.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t2.setCellRenderer(centerRenderer2);
+            
+            TableColumn t3 = tablaClientes.getColumn("NOMBRE COMPLETO");
+            t3.setPreferredWidth(240);
+            t3.setMaxWidth(240);
+            t3.setMinWidth(240);
+            
+            TableColumn t4 = tablaClientes.getColumn("DIRECCION");
+            t4.setPreferredWidth(200);
+            t4.setMaxWidth(200);
+            t4.setMinWidth(200);
+            
+            TableColumn t5 = tablaClientes.getColumn("CELULAR");
+            t5.setPreferredWidth(100);
+            t5.setMaxWidth(100);
+            t5.setMinWidth(100);
+            DefaultTableCellRenderer centerRenderer5 = new DefaultTableCellRenderer();
+            centerRenderer5.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t5.setCellRenderer(centerRenderer5);
+            
+            TableColumn t6 = tablaClientes.getColumn("CORREO");
+            t6.setPreferredWidth(126);
+            t6.setMaxWidth(126);
+            t6.setMinWidth(126);
+            
+            tablaClientes.setRowHeight(25);
+        } catch (Exception e) {
+            System.out.println("Error al listar Clientes: " + e);
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -149,8 +210,14 @@ public class Clientes extends javax.swing.JPanel {
         lblTitulo.setMinimumSize(new java.awt.Dimension(210, 28));
         lblTitulo.setPreferredSize(new java.awt.Dimension(210, 28));
 
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevo.setMaximumSize(new java.awt.Dimension(100, 42));
         btnNuevo.setMinimumSize(new java.awt.Dimension(100, 42));
+        btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevoMouseClicked(evt);
+            }
+        });
 
         nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/btnNuevo.png"))); // NOI18N
 
@@ -248,6 +315,17 @@ public class Clientes extends javax.swing.JPanel {
 
     private void btnClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseExited
     }//GEN-LAST:event_btnClientesMouseExited
+
+    private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
+//        Trabajadores Trabajadores = new Trabajadores();
+//            
+//        Trabajadores.setSize(new Dimension(970, 620));
+//        Trabajadores.setLocation(0,0);
+//        Principal.PanelPrincipal.removeAll();
+//        Principal.PanelPrincipal.add(Trabajadores,BorderLayout.CENTER);
+//        Principal.PanelPrincipal.revalidate();
+//        Principal.PanelPrincipal.repaint();
+    }//GEN-LAST:event_btnNuevoMouseClicked
 
     
     

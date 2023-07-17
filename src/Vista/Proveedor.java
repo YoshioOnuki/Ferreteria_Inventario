@@ -1,18 +1,72 @@
 
 package Vista;
 
+import Consultas.proveedorConsulta;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 public class Proveedor extends javax.swing.JPanel {
-
+    
+    DefaultTableModel m = new DefaultTableModel();
+    proveedorConsulta proveedorConsulta = new proveedorConsulta();
+    
     public Proveedor() {
         initComponents();
+        mostrarUsuarios();
     }
     
+    void mostrarUsuarios(){
+        try {
+            m = proveedorConsulta.consultarProveedores();
+            tablaProveedor.setModel(m);
+
+            JTableHeader header = tablaProveedor.getTableHeader();
+            Font font = header.getFont();
+            header.setFont(font.deriveFont(Font.BOLD, 14f));
+            
+            TableColumn t1 = tablaProveedor.getColumn("ID");
+            t1.setPreferredWidth(50);
+            t1.setMaxWidth(50);
+            t1.setMinWidth(50);
+            DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer();
+            centerRenderer1.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t1.setCellRenderer(centerRenderer1);
+            
+            TableColumn t2 = tablaProveedor.getColumn("PROVEEDOR");
+            t2.setPreferredWidth(180);
+            t2.setMaxWidth(180);
+            t2.setMinWidth(180);
+            
+            
+            TableColumn t3 = tablaProveedor.getColumn("DIRECCION");
+            t3.setPreferredWidth(300);
+            t3.setMaxWidth(300);
+            t3.setMinWidth(300);
+            
+            TableColumn t4 = tablaProveedor.getColumn("CELULAR");
+            t4.setPreferredWidth(100);
+            t4.setMaxWidth(100);
+            t4.setMinWidth(100);
+            DefaultTableCellRenderer centerRenderer4 = new DefaultTableCellRenderer();
+            centerRenderer4.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t4.setCellRenderer(centerRenderer4);
+            
+            TableColumn t5 = tablaProveedor.getColumn("CORREO");
+            t5.setPreferredWidth(186);
+            t5.setMaxWidth(186);
+            t5.setMinWidth(186);
+            
+            tablaProveedor.setRowHeight(25);
+        } catch (Exception e) {
+            System.out.println("Error al listar Proveedores: " + e);
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

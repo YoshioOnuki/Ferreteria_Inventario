@@ -10,6 +10,7 @@ import Modelo.proveedor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -131,6 +132,34 @@ public class proveedorConsulta {
         }
         
         return r;
+    }
+    
+    public DefaultTableModel consultarProveedores(){
+        String [] encabe={"ID","PROVEEDOR","DIRECCION","CELULAR","CORREO"};
+        DefaultTableModel m = new DefaultTableModel(null, encabe);
+        Object[] o = new Object[5];
+        
+        String sql = "SELECT id_proveedor, proveedor, proveedor_direccion, proveedor_celular, proveedor_correo FROM proveedor";
+   
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                o[0] = rs.getInt(1);
+                o[1] = rs.getString(2);
+                o[2] = rs.getString(3);
+                o[3] = rs.getString(4);
+                o[4] = rs.getString(5);
+                
+                m.addRow(o);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error consultar datos del proveedor para una tabla: " + e);
+        }
+
+        return m;
     }
     
 }

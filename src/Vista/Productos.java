@@ -1,18 +1,83 @@
 
 package Vista;
 
+import Consultas.productoConsulta;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 public class Productos extends javax.swing.JPanel {
 
+    DefaultTableModel m = new DefaultTableModel();
+    productoConsulta productoConsulta = new productoConsulta();
+    
     public Productos() {
         initComponents();
+        mostrarProductos();
     }
-    
+
+    void mostrarProductos(){
+        try {
+            m = productoConsulta.consultarProductos();
+            tablaProductos.setModel(m);
+
+            JTableHeader header = tablaProductos.getTableHeader();
+            Font font = header.getFont();
+            header.setFont(font.deriveFont(Font.BOLD, 14f));
+            
+            TableColumn t1 = tablaProductos.getColumn("ID");
+            t1.setPreferredWidth(50);
+            t1.setMaxWidth(50);
+            t1.setMinWidth(50);
+            DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer();
+            centerRenderer1.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t1.setCellRenderer(centerRenderer1);
+            
+            TableColumn t2 = tablaProductos.getColumn("PRODUCTO");
+            t2.setPreferredWidth(180);
+            t2.setMaxWidth(180);
+            t2.setMinWidth(180);
+            
+            
+            TableColumn t3 = tablaProductos.getColumn("DESCRIPCION");
+            t3.setPreferredWidth(336);
+            t3.setMaxWidth(336);
+            t3.setMinWidth(336);
+            
+            TableColumn t4 = tablaProductos.getColumn("PRECIO");
+            t4.setPreferredWidth(80);
+            t4.setMaxWidth(80);
+            t4.setMinWidth(80);
+            DefaultTableCellRenderer centerRenderer4 = new DefaultTableCellRenderer();
+            centerRenderer4.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t4.setCellRenderer(centerRenderer4);
+            
+            TableColumn t5 = tablaProductos.getColumn("STOCK");
+            t5.setPreferredWidth(60);
+            t5.setMaxWidth(60);
+            t5.setMinWidth(60);
+            DefaultTableCellRenderer centerRenderer5 = new DefaultTableCellRenderer();
+            centerRenderer5.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t5.setCellRenderer(centerRenderer5);
+            
+            TableColumn t6 = tablaProductos.getColumn("ESTADO");
+            t6.setPreferredWidth(110);
+            t6.setMaxWidth(110);
+            t6.setMinWidth(110);
+            DefaultTableCellRenderer centerRenderer6 = new DefaultTableCellRenderer();
+            centerRenderer6.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t6.setCellRenderer(centerRenderer6);
+            
+            tablaProductos.setRowHeight(25);
+        } catch (Exception e) {
+            System.out.println("Error al listar Productos: " + e);
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -80,14 +145,17 @@ public class Productos extends javax.swing.JPanel {
         tablaProductos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaProductos);
 
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevo.setMaximumSize(new java.awt.Dimension(100, 42));
         btnNuevo.setMinimumSize(new java.awt.Dimension(100, 42));
         btnNuevo.setPreferredSize(new java.awt.Dimension(100, 42));
+        btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevoMouseClicked(evt);
+            }
+        });
 
         nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/btnNuevo.png"))); // NOI18N
-        nuevo.setMaximumSize(new java.awt.Dimension(100, 42));
-        nuevo.setMinimumSize(new java.awt.Dimension(100, 42));
-        nuevo.setPreferredSize(new java.awt.Dimension(100, 42));
 
         javax.swing.GroupLayout btnNuevoLayout = new javax.swing.GroupLayout(btnNuevo);
         btnNuevo.setLayout(btnNuevoLayout);
@@ -128,14 +196,15 @@ public class Productos extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
+        
+    }//GEN-LAST:event_btnNuevoMouseClicked
+
     
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel IconGuardar;
-    private javax.swing.JLabel IconGuardarHover;
-    private javax.swing.JPanel btnGuardar;
     private javax.swing.JPanel btnNuevo;
     private javax.swing.JPanel jPanel6;
     public static javax.swing.JScrollPane jScrollPane1;

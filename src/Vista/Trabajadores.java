@@ -1,16 +1,73 @@
 
 package Vista;
 
+import Consultas.trabajadorConsulta;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 public class Trabajadores extends javax.swing.JPanel {
 
+    DefaultTableModel m = new DefaultTableModel();
+    trabajadorConsulta trabajadorConsulta = new trabajadorConsulta();
+     
     public Trabajadores() {
         initComponents();
+        mostrarTrabajador();
+    }
+    
+    void mostrarTrabajador(){
+        try {
+            m = trabajadorConsulta.consultarTrabajadores();
+            tablaTrabajadores.setModel(m);
+
+            JTableHeader header = tablaTrabajadores.getTableHeader();
+            Font font = header.getFont();
+            header.setFont(font.deriveFont(Font.BOLD, 14f));
+            
+            TableColumn t1 = tablaTrabajadores.getColumn("ID");
+            t1.setPreferredWidth(50);
+            t1.setMaxWidth(50);
+            t1.setMinWidth(50);
+            DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer();
+            centerRenderer1.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t1.setCellRenderer(centerRenderer1);
+            
+            TableColumn t2 = tablaTrabajadores.getColumn("NOMBRE COMPLETO");
+            t2.setPreferredWidth(280);
+            t2.setMaxWidth(280);
+            t2.setMinWidth(280);
+            
+            TableColumn t3 = tablaTrabajadores.getColumn("DIRECCION");
+            t3.setPreferredWidth(280);
+            t3.setMaxWidth(280);
+            t3.setMinWidth(280);
+            
+            TableColumn t4 = tablaTrabajadores.getColumn("CELULAR");
+            t4.setPreferredWidth(106);
+            t4.setMaxWidth(106);
+            t4.setMinWidth(106);
+            DefaultTableCellRenderer centerRenderer4 = new DefaultTableCellRenderer();
+            centerRenderer4.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t4.setCellRenderer(centerRenderer4);
+            
+            TableColumn t5 = tablaTrabajadores.getColumn("ESTADO");
+            t5.setPreferredWidth(100);
+            t5.setMaxWidth(100);
+            t5.setMinWidth(100);
+            DefaultTableCellRenderer centerRenderer5 = new DefaultTableCellRenderer();
+            centerRenderer5.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            t5.setCellRenderer(centerRenderer5);
+            
+            tablaTrabajadores.setRowHeight(25);
+        } catch (Exception e) {
+            System.out.println("Error al listar Trabajadores: " + e);
+        }
     }
     
     
@@ -149,8 +206,14 @@ public class Trabajadores extends javax.swing.JPanel {
         lblTitulo.setMinimumSize(new java.awt.Dimension(210, 28));
         lblTitulo.setPreferredSize(new java.awt.Dimension(210, 28));
 
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevo.setMaximumSize(new java.awt.Dimension(100, 42));
         btnNuevo.setMinimumSize(new java.awt.Dimension(100, 42));
+        btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevoMouseClicked(evt);
+            }
+        });
 
         nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/btnNuevo.png"))); // NOI18N
 
@@ -170,23 +233,15 @@ public class Trabajadores extends javax.swing.JPanel {
         jScrollPane1.setMinimumSize(new java.awt.Dimension(816, 350));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(816, 350));
 
-        tablaTrabajadores.setFont(new java.awt.Font("SF UI Display", 0, 17)); // NOI18N
+        tablaTrabajadores.setFont(new java.awt.Font("SF UI Display", 0, 17));
         tablaTrabajadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "NOMBRE COMPLETO", "DIRECCION", "CELULAR", "ESTADO"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         tablaTrabajadores.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaTrabajadores);
 
@@ -249,6 +304,17 @@ public class Trabajadores extends javax.swing.JPanel {
     private void btnClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseExited
         btnClientes.setBackground(new Color(53, 66, 89));
     }//GEN-LAST:event_btnClientesMouseExited
+
+    private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
+//        Clientes Clientes = new Clientes();
+//            
+//        Clientes.setSize(new Dimension(970, 620));
+//        Clientes.setLocation(0,0);
+//        Principal.PanelPrincipal.removeAll();
+//        Principal.PanelPrincipal.add(Clientes,BorderLayout.CENTER);
+//        Principal.PanelPrincipal.revalidate();
+//        Principal.PanelPrincipal.repaint();
+    }//GEN-LAST:event_btnNuevoMouseClicked
 
     
     
