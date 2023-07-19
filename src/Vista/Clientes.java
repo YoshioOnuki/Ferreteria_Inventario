@@ -69,7 +69,7 @@ public class Clientes extends javax.swing.JPanel {
             t6.setMaxWidth(126);
             t6.setMinWidth(126);
             
-            tablaClientes.setRowHeight(25);
+            tablaClientes.setRowHeight(30);
         } catch (Exception e) {
             System.out.println("Error al listar Clientes: " + e);
         }
@@ -317,14 +317,14 @@ public class Clientes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClientesMouseExited
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-//        Trabajadores Trabajadores = new Trabajadores();
-//            
-//        Trabajadores.setSize(new Dimension(970, 620));
-//        Trabajadores.setLocation(0,0);
-//        Principal.PanelPrincipal.removeAll();
-//        Principal.PanelPrincipal.add(Trabajadores,BorderLayout.CENTER);
-//        Principal.PanelPrincipal.revalidate();
-//        Principal.PanelPrincipal.repaint();
+        ClienteNuevo ClienteNuevo = new ClienteNuevo();
+            
+        ClienteNuevo.setSize(new Dimension(970, 620));
+        ClienteNuevo.setLocation(0,0);
+        Principal.PanelPrincipal.removeAll();
+        Principal.PanelPrincipal.add(ClienteNuevo,BorderLayout.CENTER);
+        Principal.PanelPrincipal.revalidate();
+        Principal.PanelPrincipal.repaint();
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     

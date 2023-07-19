@@ -60,7 +60,7 @@ public class Compras extends javax.swing.JPanel {
             centerRenderer4.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
             t4.setCellRenderer(centerRenderer4);
             
-            tablaCompras.setRowHeight(25);
+            tablaCompras.setRowHeight(30);
         } catch (Exception e) {
             System.out.println("Error al listar compras: " + e);
         }

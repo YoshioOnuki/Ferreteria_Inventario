@@ -79,7 +79,7 @@ public class ReporteVentas extends javax.swing.JPanel {
             centerRenderer6.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
             t6.setCellRenderer(centerRenderer6);
             
-            tablaVentas.setRowHeight(25);
+            tablaVentas.setRowHeight(30);
         } catch (Exception e) {
             System.out.println("Error al listar reporte de Ventas: " + e);
         }

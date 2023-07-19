@@ -10,6 +10,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 
 public class Login extends javax.swing.JFrame {
 
@@ -58,7 +59,6 @@ public class Login extends javax.swing.JFrame {
                 
                 rol = rolConsulta.datosRolID(id_rol);
                 
-                //Visualizar...
                 Principal principal = new Principal();
                 principal.setVisible(true);
                 dispose();
@@ -333,6 +333,16 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIngresarMouseExited
 
     public static void main(String args[]) {
+        
+        try {
+            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.translucencySmallShadow;
+            BeautyEyeLNFHelper.translucencyAtFrameInactive = false;
+            UIManager.put("RootPane.setupButtonVisible", false);
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

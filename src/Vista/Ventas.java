@@ -65,7 +65,7 @@ public class Ventas extends javax.swing.JPanel {
             centerRenderer5.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
             t5.setCellRenderer(centerRenderer5);
             
-            tablaVentas.setRowHeight(25);
+            tablaVentas.setRowHeight(30);
         } catch (Exception e) {
             System.out.println("Error al listar ventas: " + e);
         }

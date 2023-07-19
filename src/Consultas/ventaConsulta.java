@@ -44,7 +44,7 @@ public class ventaConsulta {
     }
     
     public DefaultTableModel consultarVentas(){
-        String [] encabe={"ID","PROVEEDOR","PRODUCTO","FECHA","TOTAL"};
+        String [] encabe={"ID","CLIENTE","TRABAJADOR","FECHA","TOTAL"};
         DefaultTableModel m = new DefaultTableModel(null, encabe);
         Object[] o = new Object[5];
         

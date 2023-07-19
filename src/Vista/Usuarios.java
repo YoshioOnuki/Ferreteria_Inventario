@@ -65,7 +65,7 @@ public class Usuarios extends javax.swing.JPanel {
             centerRenderer5.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
             t5.setCellRenderer(centerRenderer5);
             
-            tablaUsuarios.setRowHeight(25);
+            tablaUsuarios.setRowHeight(30);
         } catch (Exception e) {
             System.out.println("Error al listar Usuarios: " + e);
         }

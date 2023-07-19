@@ -125,7 +125,7 @@ public class productoConsulta {
         Object[] o = new Object[6];
         
         String sql = "SELECT id_producto, producto, producto_descripcion, producto_precio, producto_stock, producto_estado FROM producto WHERE producto_estado=1";
-   
+        
         try {
             acce = con.conectardb();
             ps = acce.prepareStatement(sql);

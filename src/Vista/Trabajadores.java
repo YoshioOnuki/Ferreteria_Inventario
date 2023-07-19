@@ -64,7 +64,7 @@ public class Trabajadores extends javax.swing.JPanel {
             centerRenderer5.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
             t5.setCellRenderer(centerRenderer5);
             
-            tablaTrabajadores.setRowHeight(25);
+            tablaTrabajadores.setRowHeight(30);
         } catch (Exception e) {
             System.out.println("Error al listar Trabajadores: " + e);
         }
@@ -306,14 +306,14 @@ public class Trabajadores extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClientesMouseExited
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-//        Clientes Clientes = new Clientes();
-//            
-//        Clientes.setSize(new Dimension(970, 620));
-//        Clientes.setLocation(0,0);
-//        Principal.PanelPrincipal.removeAll();
-//        Principal.PanelPrincipal.add(Clientes,BorderLayout.CENTER);
-//        Principal.PanelPrincipal.revalidate();
-//        Principal.PanelPrincipal.repaint();
+        TrabajadorNuevo TrabajadoresNuevo = new TrabajadorNuevo();
+            
+        TrabajadoresNuevo.setSize(new Dimension(970, 620));
+        TrabajadoresNuevo.setLocation(0,0);
+        Principal.PanelPrincipal.removeAll();
+        Principal.PanelPrincipal.add(TrabajadoresNuevo,BorderLayout.CENTER);
+        Principal.PanelPrincipal.revalidate();
+        Principal.PanelPrincipal.repaint();
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     

@@ -79,7 +79,7 @@ public class ReporteCompras extends javax.swing.JPanel {
             centerRenderer6.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
             t6.setCellRenderer(centerRenderer6);
             
-            tablaCompras.setRowHeight(25);
+            tablaCompras.setRowHeight(30);
         } catch (Exception e) {
             System.out.println("Error al listar reporte de compras: " + e);
         }

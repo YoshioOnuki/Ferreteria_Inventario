@@ -62,7 +62,7 @@ public class Proveedor extends javax.swing.JPanel {
             t5.setMaxWidth(186);
             t5.setMinWidth(186);
             
-            tablaProveedor.setRowHeight(25);
+            tablaProveedor.setRowHeight(30);
         } catch (Exception e) {
             System.out.println("Error al listar Proveedores: " + e);
         }

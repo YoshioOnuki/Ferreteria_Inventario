@@ -73,7 +73,7 @@ public class Productos extends javax.swing.JPanel {
             centerRenderer6.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
             t6.setCellRenderer(centerRenderer6);
             
-            tablaProductos.setRowHeight(25);
+            tablaProductos.setRowHeight(30);
         } catch (Exception e) {
             System.out.println("Error al listar Productos: " + e);
         }
