@@ -25,6 +25,30 @@ public class usuarioConsulta {
     Connection acce;
     
     
+    //Registrar Usuario
+    public int addUsuario(Object[] ob) {
+        int r = 0;
+        String sql = "INSERT INTO usuario(usuario, usuario_contrasenia, id_trabajador, id_rol, usuario_estado) VALUES(?,?,?,?,?)";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            ps.setObject(1, ob[0]);
+            ps.setObject(2, ob[1]);
+            ps.setObject(3, ob[2]);
+            ps.setObject(4, ob[3]);
+            ps.setObject(5, 1);
+            r = ps.executeUpdate();
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al registrar un Usuario " + e);
+        }
+        if(r > 0){
+            r = 1;
+        }
+        return r;
+    }
+    
     //Validamos los campos del inicio de sesion
     public Modelo.usuario validarUsuario(String usuario, String contrasenia){
         Modelo.usuario modeloUsuario = new usuario();
@@ -75,6 +99,26 @@ public class usuarioConsulta {
         return r;
     }
     
+    public int cantidadUsuariosAdmin(){
+        int r = 0;
+        
+        String sql = "SELECT count(id_usuario) FROM usuario WHERE id_rol = 1";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                r = rs.getInt(1);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener la cantidad de usuarios admin:  " + e);
+        }
+        
+        return r;
+    }
+    
     public DefaultTableModel consultarUsuarios(){
         String [] encabe={"ID","USUARIO","TRABAJADOR","ROL","ESTADO"};
         DefaultTableModel m = new DefaultTableModel(null, encabe);
@@ -102,4 +146,91 @@ public class usuarioConsulta {
 
         return m;
     }
+    
+    //Obtenemos los datos del usuario por el ID
+    public Modelo.usuario datosUsuarioID(int id_usuario){
+        Modelo.usuario usuario = new usuario();
+        
+        String sql = "SELECT usuario, id_trabajador, id_rol FROM usuario WHERE id_usuario=?";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            ps.setInt(1, id_usuario);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                usuario.setUsuario(rs.getString(1));
+                usuario.setId_trabajdor(rs.getInt(2));
+                usuario.setId_rol(rs.getInt(3));
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener datos de usuario por su ID:  " + e);
+        }
+        
+        return usuario;
+    }
+    
+    public int validarUsuarioTrabajador(int id_trabajador){
+        int r = 0;
+        
+        String sql = "SELECT id_usuario FROM usuario WHERE id_trabajador=?";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            ps.setInt(1, id_trabajador);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                r = rs.getInt(1);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener datos de usuario por su ID:  " + e);
+        }
+        
+        return r;
+    }
+    
+    public int updateUsuario(Object[] ob, int id_usuario){
+        int r = 0;
+        
+        String sql = "UPDATE usuario SET usuario=?, id_trabajador=?, id_rol=? WHERE id_usuario=?";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            ps.setObject(1, ob[0]);
+            ps.setObject(2, ob[1]);
+            ps.setObject(3, ob[2]);
+            ps.setObject(4, id_usuario);
+            r = ps.executeUpdate();
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error actualizar el Usuario "+ id_usuario + ": " + e);
+        }
+        if(r > 0){
+            r = 2;
+        }
+        return r;
+    }
+    
+    public int deleteUsuario(int id_usuario) {
+        int r = 0;
+
+        String sql = "DELETE FROM usuario WHERE id_usuario=?";
+
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            ps.setInt(1, id_usuario);
+            r = ps.executeUpdate();
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al eliminar el Usuario " + id_usuario + ": " + e);
+        }
+
+        return r;
+    }
+
 }

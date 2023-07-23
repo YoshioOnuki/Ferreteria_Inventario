@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -16,9 +17,30 @@ public class Clientes extends javax.swing.JPanel {
     DefaultTableModel m = new DefaultTableModel();
     clienteConsulta clienteConsulta = new clienteConsulta();
     
+    public static int id_cliente, tipo_vista;
+    
     public Clientes() {
         initComponents();
         mostrarCliente();
+    }
+    
+    void editar(){
+        int fila = tablaClientes.getSelectedRow();
+        if(fila == -1){
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        }else{
+            id_cliente = Integer.parseInt(tablaClientes.getValueAt(fila, 0).toString());
+            tipo_vista = 2;//Vista de editar
+        
+            Vista.ClienteNuevo ClienteNuevo = new ClienteNuevo();
+            ClienteNuevo.setSize(970, 620);
+            ClienteNuevo.setLocation(0, 0);
+            Principal.PanelPrincipal.removeAll();
+            Principal.PanelPrincipal.add(ClienteNuevo, BorderLayout.CENTER);
+            Principal.PanelPrincipal.revalidate();
+            Principal.PanelPrincipal.repaint();
+            
+        }
     }
     
     void mostrarCliente(){
@@ -85,6 +107,8 @@ public class Clientes extends javax.swing.JPanel {
         btnClientes = new javax.swing.JPanel();
         lblVentas = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
+        btnEditar = new javax.swing.JPanel();
+        editar = new javax.swing.JLabel();
         btnNuevo = new javax.swing.JPanel();
         nuevo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -210,6 +234,28 @@ public class Clientes extends javax.swing.JPanel {
         lblTitulo.setMinimumSize(new java.awt.Dimension(210, 28));
         lblTitulo.setPreferredSize(new java.awt.Dimension(210, 28));
 
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditar.setMaximumSize(new java.awt.Dimension(100, 42));
+        btnEditar.setMinimumSize(new java.awt.Dimension(100, 42));
+        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditarMouseClicked(evt);
+            }
+        });
+
+        editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/btnEditar.png"))); // NOI18N
+
+        javax.swing.GroupLayout btnEditarLayout = new javax.swing.GroupLayout(btnEditar);
+        btnEditar.setLayout(btnEditarLayout);
+        btnEditarLayout.setHorizontalGroup(
+            btnEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        btnEditarLayout.setVerticalGroup(
+            btnEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevo.setMaximumSize(new java.awt.Dimension(100, 42));
         btnNuevo.setMinimumSize(new java.awt.Dimension(100, 42));
@@ -267,7 +313,10 @@ public class Clientes extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(30, 30, 30)
+                            .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -278,7 +327,9 @@ public class Clientes extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
@@ -314,9 +365,12 @@ public class Clientes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClientesMouseEntered
 
     private void btnClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseExited
+        
     }//GEN-LAST:event_btnClientesMouseExited
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
+        tipo_vista = 1;//Vista Nuevo
+        
         ClienteNuevo ClienteNuevo = new ClienteNuevo();
             
         ClienteNuevo.setSize(new Dimension(970, 620));
@@ -327,13 +381,19 @@ public class Clientes extends javax.swing.JPanel {
         Principal.PanelPrincipal.repaint();
     }//GEN-LAST:event_btnNuevoMouseClicked
 
+    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
+        editar();
+    }//GEN-LAST:event_btnEditarMouseClicked
+
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnClientes;
+    private javax.swing.JPanel btnEditar;
     private javax.swing.JPanel btnNuevo;
     private javax.swing.JPanel btnTrabajadores;
+    private javax.swing.JLabel editar;
     private javax.swing.JPanel jPanel6;
     public static javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitulo;

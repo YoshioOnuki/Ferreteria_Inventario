@@ -10,6 +10,7 @@ import Modelo.cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,7 +44,9 @@ public class clienteConsulta {
         } catch (Exception e) {
             System.out.println("Error al registrar un cliente" + e);
         }
-        
+        if(r > 0){
+            r = 1;
+        }
         return r;
     }
     
@@ -133,10 +136,10 @@ public class clienteConsulta {
     }
     
     //Obtenemos los datos del cliente por el DNI
-    public Modelo.cliente datosClienteDNI(String documento){
-        Modelo.cliente modeloCliente = new cliente();
+    public String datosClienteDNI(String documento){
+        String r = "";
         
-        String sql = "SELECT * FROM cliente WHERE id_cliente=?";
+        String sql = "SELECT cliente_documento FROM cliente WHERE cliente_documento=?";
         
         try {
             acce = con.conectardb();
@@ -144,13 +147,7 @@ public class clienteConsulta {
             ps.setString(1, documento);
             rs = ps.executeQuery();
             while(rs.next()){
-                modeloCliente.setId_cliente(rs.getInt(1));
-                modeloCliente.setCliente_documento(rs.getString(2));
-                modeloCliente.setCliente_nombre_completo(rs.getString(3));
-                modeloCliente.setCliente_direccion(rs.getString(4));
-                modeloCliente.setCliente_celular(rs.getString(5));
-                modeloCliente.setCliente_email(rs.getString(6));
-                modeloCliente.setCliente_tipo(rs.getString(7));
+                r = rs.getString(1);
             }
             //Cerramos la conexion
             acce.close();
@@ -158,13 +155,13 @@ public class clienteConsulta {
             System.out.println("Error al obtener datos del cliente por su documento:  " + e);
         }
         
-        return modeloCliente;
+        return r;
     }
     
-    public int updateCliente(Object[] ob, int id_cliente, String tipo) {
+    public int updateCliente(Object[] ob, int id_cliente) {
         int r = 0;
         
-        String sql = "UPDATE cliente SET cliente_documento=?, cliente_nombre_completo=?, cliente_direccion=?, cliente_celular=?, cliente_email=? WHERE id_cliente=?";
+        String sql = "UPDATE cliente SET cliente_documento=?, cliente_nombre_completo=?, cliente_direccion=?, cliente_celular=?, cliente_email=?, cliente_tipo=? WHERE id_cliente=?";
         
         try {
             acce = con.conectardb();
@@ -173,14 +170,17 @@ public class clienteConsulta {
             ps.setObject(2, ob[1]);
             ps.setObject(3, ob[2]);
             ps.setObject(4, ob[3]);
-            ps.setObject(5, tipo);
-            ps.setObject(6, id_cliente);
+            ps.setObject(5, ob[4]);
+            ps.setObject(6, ob[5]);
+            ps.setObject(7, id_cliente);
             r = ps.executeUpdate();
             acce.close();
         } catch (Exception e) {
             System.out.println("Error actualizar el cliente "+ id_cliente + ": " + e);
         }
-        
+        if(r > 0){
+            r = 2;
+        }
         return r;
     }
     
@@ -231,5 +231,24 @@ public class clienteConsulta {
         }
 
         return m;
+    }
+    
+    public void cargarComboCliente(JComboBox cbo){
+        String sql = "SELECT cliente_nombre_completo FROM cliente";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            cbo.removeAllItems();
+            cbo.addItem("Seleccione el Cliente");
+            
+            while(rs.next()){
+                cbo.addItem(rs.getString(1));
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al cargar el combo de Cliente: " + e);
+        }
     }
 }

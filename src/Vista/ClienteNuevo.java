@@ -2,16 +2,40 @@
 package Vista;
 
 import Consultas.clienteConsulta;
+import Modelo.cliente;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
 public class ClienteNuevo extends javax.swing.JPanel {
     
+    Modelo.cliente cliente = new cliente();
     clienteConsulta clienteConsulta = new clienteConsulta();
+    
+    int id;
     
     public ClienteNuevo() {
         initComponents();
+        modo();
+    }
+    
+    public void modo(){
+        if(Clientes.tipo_vista == 2){//Editar
+            lblTitulo.setText("Editar Cliente");
+            
+            //Cargamos el modelo con los datos del cliente
+            id = Clientes.id_cliente;
+            cliente = clienteConsulta.datosClienteID(id);
+            
+            //Cargamos los datos en los txts
+            txtDocumento.setText(cliente.getCliente_documento());
+            txtNombre.setText(cliente.getCliente_nombre_completo());
+            txtDireccion.setText(cliente.getCliente_direccion());
+            txtCelular.setText(cliente.getCliente_celular());
+            txtCorreo.setText(cliente.getCliente_email());
+        }else{
+            lblTitulo.setText("Agregar Nuevos Clientes");
+        }
     }
     
     public void agregarCliente(){
@@ -34,30 +58,67 @@ public class ClienteNuevo extends javax.swing.JPanel {
             String direccion = txtDireccion.getText();
             String celular = txtCelular.getText();
             String correo = txtCorreo.getText();
+            int respuesta = 0;
             
-            Object[] ob = new Object[6];
+            
+            if(Clientes.tipo_vista == 1){//Nuevo
+                String documento_validar = clienteConsulta.datosClienteDNI(documento);
+                if(documento_validar == ""){
+                    Object[] ob = new Object[6];
 
-            ob[0] = documento;
-            ob[1] = nombre;
-            ob[2] = direccion;
-            ob[3] = celular;
-            ob[4] = correo;
-            if(txtDocumento.getText().length() == 8){
-                ob[5] = "Personal Natural";
-            }else if(txtDocumento.getText().length() == 9){
-                ob[5] = "Extranjero";
-            }else if(txtDocumento.getText().length() == 11){
-                ob[5] = "Empresa";
+                    ob[0] = documento;
+                    ob[1] = nombre;
+                    ob[2] = direccion;
+                    ob[3] = celular;
+                    ob[4] = correo;
+                    if(txtDocumento.getText().length() == 8){
+                        ob[5] = "Personal Natural";
+                    }else if(txtDocumento.getText().length() == 9){
+                        ob[5] = "Extranjero";
+                    }else if(txtDocumento.getText().length() == 11){
+                        ob[5] = "Empresa";
+                    }
+
+                    respuesta = clienteConsulta.addCliente(ob);
+                }else{
+                    JOptionPane.showMessageDialog(null, "¡El cliente ya existe!");
+                    return;
+                }
+            }else if(Clientes.tipo_vista == 2){
+                Object[] ob = new Object[6];
+
+                ob[0] = documento;
+                ob[1] = nombre;
+                ob[2] = direccion;
+                ob[3] = celular;
+                ob[4] = correo;
+                
+                System.out.println(txtDocumento.getText().length());
+                if(txtDocumento.getText().length() == 8){
+                    ob[5] = "Personal Natural";
+                    System.out.println("8");
+                }else if(txtDocumento.getText().length() == 9){
+                    ob[5] = "Extranjero";
+                    System.out.println("9");
+                }else if(txtDocumento.getText().length() == 11){
+                    ob[5] = "Empresa";
+                    System.out.println("11");
+                }else{
+                    JOptionPane.showMessageDialog(null, "¡El numero de documento es incorrecto!");
+                    return;
+                }
+
+                respuesta = clienteConsulta.updateCliente(ob, id);
             }
-
-            int respuesta = clienteConsulta.addCliente(ob);
-
-            if(respuesta>0){
+            
+            if(respuesta == 1){
                 JOptionPane.showMessageDialog(null, "Datos del cliente ingresados correctamente");
+            }else if(respuesta ==2){
+                JOptionPane.showMessageDialog(null, "Datos del cliente actualizados correctamente");
             }
 
             Clientes Clientes = new Clientes();
-            
+
             Clientes.setSize(new Dimension(970, 620));
             Clientes.setLocation(0,0);
             Principal.PanelPrincipal.removeAll();

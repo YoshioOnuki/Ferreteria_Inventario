@@ -57,7 +57,7 @@ public class Login extends javax.swing.JFrame {
                 id_rol = usuarioModelo.getId_rol();
                 trabajador_nombre = trabajadorModelo.getTrabajador_nombre_completo();
                 
-                rol = rolConsulta.datosRolID(id_rol);
+                rol = rolConsulta.rolID(id_rol);
                 
                 Principal principal = new Principal();
                 principal.setVisible(true);

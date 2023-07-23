@@ -2,6 +2,7 @@
 package Vista;
 
 import Consultas.trabajadorConsulta;
+import Modelo.trabajador;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
@@ -9,9 +10,30 @@ import javax.swing.JOptionPane;
 public class TrabajadorNuevo extends javax.swing.JPanel {
     
     trabajadorConsulta trabajadorConsulta = new trabajadorConsulta();
+    Modelo.trabajador trabajador = new trabajador();
+    
+    public int id;
     
     public TrabajadorNuevo() {
         initComponents();
+        modo();
+    }
+    
+    public void modo(){
+        if(Trabajadores.tipo_vista == 2){//Editar
+            lblTitulo.setText("Editar Trabajador");
+            
+            //Cargamos el modelo con los datos del Trabajador
+            id = Trabajadores.id_trabajador;
+            trabajador = trabajadorConsulta.datosTrabajadorID(id);
+            
+            //Cargamos los datos en los txts
+            txtNombre.setText(trabajador.getTrabajador_nombre_completo());
+            txtDireccion.setText(trabajador.getTrabajador_direccion());
+            txtCelular.setText(trabajador.getTrabajador_celular());
+        }else{
+            lblTitulo.setText("Agregar Nuevos Trabajadores");
+        }
     }
     
     public void agregarTrabajador(){
@@ -25,21 +47,29 @@ public class TrabajadorNuevo extends javax.swing.JPanel {
                 txtCelular.requestFocus();
             }
         }else{
+            
+            int respuesta = 0;
+            
             String nombre = txtNombre.getText();
             String direccion = txtDireccion.getText();
             String celular = txtCelular.getText();
-            
+
             Object[] ob = new Object[4];
 
             ob[0] = nombre;
             ob[1] = direccion;
             ob[2] = celular;
             ob[3] = 1;
-
-            int respuesta = trabajadorConsulta.addTrabajador(ob);
-
-            if(respuesta>0){
+            if(Trabajadores.tipo_vista == 1){//Nuevo
+                respuesta = trabajadorConsulta.addTrabajador(ob);
+            }else{
+                respuesta = trabajadorConsulta.updateTrabajador(ob, id);
+            }
+            
+            if(respuesta == 1){
                 JOptionPane.showMessageDialog(null, "Datos del trabajador ingresados correctamente");
+            }else if(respuesta ==2){
+                JOptionPane.showMessageDialog(null, "Datos del cliente actualizados correctamente");
             }
 
             Trabajadores Trabajadores = new Trabajadores();

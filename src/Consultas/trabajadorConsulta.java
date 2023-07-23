@@ -10,6 +10,7 @@ import Modelo.trabajador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -41,7 +42,9 @@ public class trabajadorConsulta {
         } catch (Exception e) {
             System.out.println("Error al registrar trabajador" + e);
         }
-        
+        if(r > 0){
+            r = 1;
+        }
         return r;
     }
     
@@ -117,6 +120,48 @@ public class trabajadorConsulta {
         }
 
         return m;
+    }
+    
+    public int updateTrabajador(Object[] ob, int id_trabajador) {
+        int r = 0;
+        
+        String sql = "UPDATE trabajador SET trabajador_nombre_completo=?, trabajador_direccion=?, trabajador_celular=? WHERE id_trabajador=?";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            ps.setObject(1, ob[0]);
+            ps.setObject(2, ob[1]);
+            ps.setObject(3, ob[2]);
+            ps.setObject(4, id_trabajador);
+            r = ps.executeUpdate();
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error actualizar el TRABAJADOR "+ id_trabajador + ": " + e);
+        }
+        if(r > 0){
+            r = 2;
+        }
+        return r;
+    }
+    
+    public void cargarComboTrabajador(JComboBox cbo){
+        String sql = "SELECT trabajador_nombre_completo FROM trabajador;";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            cbo.removeAllItems();
+            cbo.addItem("Seleccione Trabajador");
+            
+            while(rs.next()){
+                cbo.addItem(rs.getString(1));
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al cargar el combo de trabajador: " + e);
+        }
     }
     
 }
