@@ -3,11 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/yoshi/OneDrive/Documentos/NetBeansProjects/Ferreteria_Inventario/src/Consultas/productoConsulta.java</file>
             <file>file:/C:/Users/yoshi/OneDrive/Documentos/NetBeansProjects/Ferreteria_Inventario/src/Vista/Clientes.java</file>
             <file>file:/C:/Users/yoshi/OneDrive/Documentos/NetBeansProjects/Ferreteria_Inventario/src/Vista/ClienteNuevo.java</file>
+            <file>file:/C:/Users/yoshi/OneDrive/Documentos/NetBeansProjects/Ferreteria_Inventario/src/Consultas/clienteConsulta.java</file>
+            <file>file:/C:/Users/yoshi/OneDrive/Documentos/NetBeansProjects/Ferreteria_Inventario/src/Vista/Trabajadores.java</file>
+            <file>file:/C:/Users/yoshi/OneDrive/Documentos/NetBeansProjects/Ferreteria_Inventario/src/Vista/Usuarios.java</file>
+            <file>file:/C:/Users/yoshi/OneDrive/Documentos/NetBeansProjects/Ferreteria_Inventario/src/Vista/UsuarioNuevo.java</file>
             <file>file:/C:/Users/yoshi/OneDrive/Documentos/NetBeansProjects/Ferreteria_Inventario/src/Vista/TrabajadorNuevo.java</file>
+            <file>file:/C:/Users/yoshi/OneDrive/Documentos/NetBeansProjects/Ferreteria_Inventario/src/Vista/Login.java</file>
             <file>file:/C:/Users/yoshi/OneDrive/Documentos/NetBeansProjects/Ferreteria_Inventario/src/Consultas/trabajadorConsulta.java</file>
+            <file>file:/C:/Users/yoshi/OneDrive/Documentos/NetBeansProjects/Ferreteria_Inventario/src/Consultas/usuarioConsulta.java</file>
+            <file>file:/C:/Users/yoshi/OneDrive/Documentos/NetBeansProjects/Ferreteria_Inventario/src/Consultas/rolConsulta.java</file>
         </group>
     </open-files>
 </project-private>

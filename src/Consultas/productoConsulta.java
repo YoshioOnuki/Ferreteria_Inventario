@@ -37,13 +37,15 @@ public class productoConsulta {
             ps.setObject(2, ob[1]);
             ps.setObject(3, ob[2]);
             ps.setObject(4, ob[3]);
-            ps.setObject(5, ob[4]);
+            ps.setObject(5, 1);
             r = ps.executeUpdate();
             acce.close();
         } catch (Exception e) {
             System.out.println("Error al registrar un producto" + e);
         }
-        
+        if(r > 0){
+            r = 1;
+        }
         return r;
     }
     
@@ -247,7 +249,9 @@ public class productoConsulta {
         } catch (Exception e) {
             System.out.println("Error actualizar el producto "+ id_producto + ": " + e);
         }
-        
+        if(r > 0){
+            r = 2;
+        }
         return r;
     }
 
