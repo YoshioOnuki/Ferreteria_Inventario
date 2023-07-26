@@ -22,6 +22,7 @@ public class Clientes extends javax.swing.JPanel {
     public Clientes() {
         initComponents();
         mostrarCliente();
+        ClienteNuevo.tipo_vista = 0;
     }
     
     void editar(){
@@ -39,7 +40,6 @@ public class Clientes extends javax.swing.JPanel {
             Principal.PanelPrincipal.add(ClienteNuevo, BorderLayout.CENTER);
             Principal.PanelPrincipal.revalidate();
             Principal.PanelPrincipal.repaint();
-            
         }
     }
     

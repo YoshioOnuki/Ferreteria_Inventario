@@ -41,8 +41,6 @@ public class Ventas extends javax.swing.JPanel {
     ventaConsulta ventaConsulta = new ventaConsulta();
     Consultas.clienteConsulta clienteConsulta = new clienteConsulta();
     
-    public static int tipo_vista;
-    
     public Ventas() {
         initComponents();
         mostrarUsuarios();
@@ -61,6 +59,7 @@ public class Ventas extends javax.swing.JPanel {
             btnVentas.setVisible(true);
             lblVentas.setVisible(true);
         }
+        ClienteNuevo.tipo_vista = 3;
     }
     
     //Generamos el Numero del recibo
@@ -456,8 +455,13 @@ public class Ventas extends javax.swing.JPanel {
         btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevo.setMaximumSize(new java.awt.Dimension(100, 42));
         btnNuevo.setMinimumSize(new java.awt.Dimension(100, 42));
+        btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevoMouseClicked(evt);
+            }
+        });
 
-        nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/btnNuevo.png"))); // NOI18N
+        nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/btnVender.png"))); // NOI18N
 
         javax.swing.GroupLayout btnNuevoLayout = new javax.swing.GroupLayout(btnNuevo);
         btnNuevo.setLayout(btnNuevoLayout);
@@ -588,6 +592,17 @@ public class Ventas extends javax.swing.JPanel {
     private void btnPDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPDFMouseClicked
         imprimir_pdf();
     }//GEN-LAST:event_btnPDFMouseClicked
+
+    private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
+        ClienteNuevo ClienteNuevo = new ClienteNuevo();
+            
+        ClienteNuevo.setSize(new Dimension(970, 620));
+        ClienteNuevo.setLocation(0,0);
+        Principal.PanelPrincipal.removeAll();
+        Principal.PanelPrincipal.add(ClienteNuevo,BorderLayout.CENTER);
+        Principal.PanelPrincipal.revalidate();
+        Principal.PanelPrincipal.repaint();
+    }//GEN-LAST:event_btnNuevoMouseClicked
 
     
     

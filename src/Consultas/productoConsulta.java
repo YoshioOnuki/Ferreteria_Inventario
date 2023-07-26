@@ -97,6 +97,33 @@ public class productoConsulta {
         return modeloProducto;
     }
     
+    //Validamos el producto, devolviendo todos los atributos por medio del modelo
+    public Modelo.producto validarProductoNombre(String producto){
+        Modelo.producto modeloProducto = new producto();
+        
+        String msql = "SELECT * FROM producto WHERE producto=?";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(msql);
+            ps.setString(1, producto);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                modeloProducto.setId_producto(rs.getInt(1));
+                modeloProducto.setProducto(rs.getString(2));
+                modeloProducto.setProducto_descripcion(rs.getString(3));
+                modeloProducto.setProducto_precio(rs.getDouble(4));
+                modeloProducto.setProducto_stock(rs.getInt(5));
+                modeloProducto.setProducto_estado(rs.getInt(6));
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al validar Producto por nombre:  " + e);
+        }
+        
+        return modeloProducto;
+    }
+    
     //Obtenemos la stock de un producto
     public int StockProducto(int id_producto){
         int r = 0;

@@ -136,10 +136,10 @@ public class clienteConsulta {
     }
     
     //Obtenemos los datos del cliente por el DNI
-    public String datosClienteDNI(String documento){
-        String r = "";
+    public Modelo.cliente datosClienteDNI(String documento){
+        Modelo.cliente modeloCliente = new cliente();
         
-        String sql = "SELECT cliente_documento FROM cliente WHERE cliente_documento=?";
+        String sql = "SELECT * FROM cliente WHERE cliente_documento=?";
         
         try {
             acce = con.conectardb();
@@ -147,7 +147,14 @@ public class clienteConsulta {
             ps.setString(1, documento);
             rs = ps.executeQuery();
             while(rs.next()){
-                r = rs.getString(1);
+                modeloCliente.setId_cliente(rs.getInt(1));
+                modeloCliente.setCliente_documento(rs.getString(2));
+                modeloCliente.setCliente_nombre_completo(rs.getString(3));
+                modeloCliente.setCliente_direccion(rs.getString(4));
+                modeloCliente.setCliente_celular(rs.getString(5));
+                modeloCliente.setCliente_email(rs.getString(6));
+                modeloCliente.setCliente_tipo(rs.getString(7));
+
             }
             //Cerramos la conexion
             acce.close();
@@ -155,7 +162,7 @@ public class clienteConsulta {
             System.out.println("Error al obtener datos del cliente por su documento:  " + e);
         }
         
-        return r;
+        return modeloCliente;
     }
     
     public int updateCliente(Object[] ob, int id_cliente) {
