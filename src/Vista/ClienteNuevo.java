@@ -17,7 +17,7 @@ public class ClienteNuevo extends javax.swing.JPanel {
     int id;
     
     public static int tipo_vista;
-    public static int paso;
+    public static int paso, id_cliente = 0;
     
     public ClienteNuevo() {
         initComponents();
@@ -87,20 +87,26 @@ public class ClienteNuevo extends javax.swing.JPanel {
             String correo = txtCorreo.getText();
             int respuesta = 0;
             
+            cliente = clienteConsulta.datosClienteDNI(documento);
+            
             if(tipo_vista == 3){
-                this.paso = 1;
-                
-                RealizarVenta RealizarVenta = new RealizarVenta();
-                RealizarVenta.setSize(new Dimension(970, 620));
-                RealizarVenta.setLocation(0,0);
-                Principal.PanelPrincipal.removeAll();
-                Principal.PanelPrincipal.add(RealizarVenta,BorderLayout.CENTER);
-                Principal.PanelPrincipal.revalidate();
-                Principal.PanelPrincipal.repaint();
+                id_cliente = cliente.getId_cliente();
+                if(id_cliente == 0){
+                    JOptionPane.showMessageDialog(null, "¡Seleccione un cliente existente!");
+                }else{
+                    this.paso = 1;
+
+                    RealizarVenta RealizarVenta = new RealizarVenta();
+                    RealizarVenta.setSize(new Dimension(970, 620));
+                    RealizarVenta.setLocation(0,0);
+                    Principal.PanelPrincipal.removeAll();
+                    Principal.PanelPrincipal.add(RealizarVenta,BorderLayout.CENTER);
+                    Principal.PanelPrincipal.revalidate();
+                    Principal.PanelPrincipal.repaint();
+                }
                 
             }else{
                 if(Clientes.tipo_vista == 1){//Nuevo
-                    cliente = clienteConsulta.datosClienteDNI(documento);
                     String documento_validar = cliente.getCliente_documento();
                     if(documento_validar == "" || documento_validar == null){
                         Object[] ob = new Object[6];

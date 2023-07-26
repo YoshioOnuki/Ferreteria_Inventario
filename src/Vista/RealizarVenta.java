@@ -2,9 +2,13 @@
 package Vista;
 
 import Consultas.productoConsulta;
+import Consultas.ventaConsulta;
 import Modelo.producto;
+import Modelo.venta;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -12,13 +16,16 @@ import javax.swing.table.TableModel;
 public class RealizarVenta extends javax.swing.JPanel {
     
     Modelo.producto producto = new producto();
+    Modelo.venta venta = new venta();
+    
     Consultas.productoConsulta productoConsulta = new productoConsulta();
+    Consultas.ventaConsulta ventaConsulta = new ventaConsulta();
     
     DefaultTableModel mpro = new DefaultTableModel();
     
     int id, ite = 0;
     
-    public static int fila=0;
+    public static int fila=0, id_producto;
     public static double total=0;
     public static TableModel tModel;
     
@@ -39,7 +46,7 @@ public class RealizarVenta extends javax.swing.JPanel {
             String nombreProducto = String.valueOf(cboProducto.getSelectedItem());
             int cantidad = Integer.parseInt(txtCantidad.getText());
             producto = productoConsulta.validarProductoNombre(nombreProducto);
-            int id_producto = producto.getId_producto();
+            id_producto = producto.getId_producto();
             double precio = producto.getProducto_precio();
             int valida = 1, posicionProd = 0;
             double importe;
@@ -58,6 +65,7 @@ public class RealizarVenta extends javax.swing.JPanel {
 
             if(valida == 1){
                 ob[0] = ite+1;
+                ite++;
                 ob[1] = nombreProducto;
                 ob[2] = cantidad;
                 ob[3] = String.format("%.2f", precio*cantidad);
@@ -74,6 +82,52 @@ public class RealizarVenta extends javax.swing.JPanel {
             }
             
         }
+    }
+    
+    void guardar(){
+        //Ingresar datos la venta
+        DateTimeFormatter ReciFech = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        String ReciF = ""+ReciFech.format(LocalDateTime.now());
+        double total = this.total;
+        int ReciEstd = 1;
+        
+        Object[] obRec = new Object[4];
+        
+        obRec[0] = ReciF;
+        obRec[1] = total;
+        obRec[2] = ClienteNuevo.id_cliente;
+        obRec[3] = Login.id_trabajador;
+        
+        int r2 = ventaConsulta.addVenta(obRec);
+        
+        //Ingresar Detalle 
+        for(int i=0; i<tablaProd.getRowCount(); i++){
+            int id_ventas = ventaConsulta.idVenta();
+            int detaReciCant = Integer.parseInt(tablaProd.getValueAt(i, 2).toString());
+            double importe = Double.parseDouble(tablaProd.getValueAt(i, 3).toString());
+
+            Object[] obDet = new Object[4];
+
+            obDet[0] = detaReciCant;
+            obDet[1] = importe;
+            obDet[2] = id_producto;
+            obDet[3] = id_ventas;
+
+            int r3 = ventaConsulta.addDetalleVenta(obDet);
+            System.out.println(id_ventas);
+        }
+        
+        JOptionPane.showMessageDialog(null, "Venta realizada con exito");
+        
+        Ventas Ventas = new Ventas();
+            
+        Ventas.setSize(new Dimension(970, 620));
+        Ventas.setLocation(0,0);
+        Principal.PanelPrincipal.removeAll();
+        Principal.PanelPrincipal.add(Ventas,BorderLayout.CENTER);
+        Principal.PanelPrincipal.revalidate();
+        Principal.PanelPrincipal.repaint();
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -320,8 +374,7 @@ public class RealizarVenta extends javax.swing.JPanel {
         if(tablaProd.getRowCount() == 0){
             JOptionPane.showMessageDialog(null, "No hay productos agregados");
         }else{
-            //Guardar
-            
+            guardar();
         }
     }//GEN-LAST:event_btnGuardarMouseClicked
 

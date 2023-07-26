@@ -206,4 +206,62 @@ public class ventaConsulta {
         
         return datos;
     }
+    
+    public int addVenta(Object[] ob) {
+        int r = 0;
+        String sql = "INSERT INTO venta(venta_fecha, venta_total, id_cliente, id_trabajador) VALUES(?,?,?,?)";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            ps.setObject(1, ob[0]);
+            ps.setObject(2, ob[1]);
+            ps.setObject(3, ob[2]);
+            ps.setObject(4, ob[3]);
+            r = ps.executeUpdate();
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al registrar una venta" + e);
+        }
+        return r;
+    }
+    
+    public int addDetalleVenta(Object[] ob) {
+        int r = 0;
+        String sql = "INSERT INTO detalle_venta(detalle_venta_cantidad, detalle_venta_precio, id_producto, id_venta) VALUES(?,?,?,?)";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            ps.setObject(1, ob[0]);
+            ps.setObject(2, ob[1]);
+            ps.setObject(3, ob[2]);
+            ps.setObject(4, ob[3]);
+            r = ps.executeUpdate();
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al registrar el detalle de venta venta" + e);
+        }
+        return r;
+    }
+    
+    public int idVenta(){
+        int r = 0;
+        
+        String sql = "SELECT max(id_venta) FROM venta";
+        
+        try {
+            acce = con.conectardb();
+            ps = acce.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                r = rs.getInt(1);
+            }
+            acce.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener el id de ventas:  " + e);
+        }
+        
+        return r;
+    }
 }
