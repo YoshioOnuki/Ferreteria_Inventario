@@ -11,6 +11,7 @@ package Vista;
  */
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
@@ -24,31 +25,31 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("Inventario de Ferreteria Mori");
+        this.setTitle("Inventario de Ferreteria José Mori");
         this.setIconImage(new ImageIcon(getClass().getResource("/Image/Logo.png")).getImage());
         mostrarComponentes();
     }
     
     
     void mostrarComponentes(){
+        
         lblNombrePrincipal.setText(" " + Login.trabajador_nombre);
         lblRol.setText(" " + Login.rol);
         
         lblBienvenido.setVisible(true);
-        this.selecBienvenido.setVisible(true);
         
         if(Login.id_rol == 1){
-            SidebarAdmin mAdmin = new SidebarAdmin();
-        
-            mAdmin.setSize(new Dimension(230, 340));
-            mAdmin.setLocation(0,0);
+            this.selecBienvenido.setVisible(true);
+            
+            SidebarAdmin SidebarAdmin = new SidebarAdmin();
+            SidebarAdmin.setSize(new Dimension(230, 340));
+            SidebarAdmin.setLocation(0,0);
             this.PanelMod2.removeAll();
-            this.PanelMod2.add(mAdmin,BorderLayout.CENTER);
+            this.PanelMod2.add(SidebarAdmin,BorderLayout.CENTER);
             this.PanelMod2.revalidate();
             this.PanelMod2.repaint();
             
             Dashboard Dashboard = new Dashboard();
-            
             Dashboard.setSize(new Dimension(970, 620));
             Dashboard.setLocation(0,0);
             this.PanelPrincipal.removeAll();
@@ -56,15 +57,17 @@ public class Principal extends javax.swing.JFrame {
             this.PanelPrincipal.revalidate();
             this.PanelPrincipal.repaint();
             
-        } else if(Login.id_rol == 2) { 
-//            SubmodulosTrabajador mTraba = new SubmodulosTrabajador();
-//        
-//            mTraba.setSize(new Dimension(230, 340));
-//            mTraba.setLocation(0,0);
-//            this.PanelMod2.removeAll();
-//            this.PanelMod2.add(mTraba,BorderLayout.CENTER);
-//            this.PanelMod2.revalidate();
-//            this.PanelMod2.repaint();
+        } else if(Login.id_rol == 2) {
+            lblBienvenido.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            this.selecBienvenido.setVisible(false);
+            
+            SidebarTrabajador SidebarTrabajador = new SidebarTrabajador();
+            SidebarTrabajador.setSize(new Dimension(230, 340));
+            SidebarTrabajador.setLocation(0,0);
+            this.PanelMod2.removeAll();
+            this.PanelMod2.add(SidebarTrabajador,BorderLayout.CENTER);
+            this.PanelMod2.revalidate();
+            this.PanelMod2.repaint();
         }
     }
     
@@ -384,31 +387,37 @@ public class Principal extends javax.swing.JFrame {
 
     
     private void btnBienvenidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBienvenidoMouseClicked
-        Dashboard Dashboard = new Dashboard();
-            
-        Dashboard.setSize(new Dimension(970, 620));
-        Dashboard.setLocation(0,0);
-        this.PanelPrincipal.removeAll();
-        this.PanelPrincipal.add(Dashboard,BorderLayout.CENTER);
-        this.PanelPrincipal.revalidate();
-        this.PanelPrincipal.repaint();
-        
-        this.selecBienvenido.setVisible(true);
-        SidebarAdmin.selecTrabajador.setVisible(false);
-        SidebarAdmin.selecUsuario.setVisible(false);
-        SidebarAdmin.selecProductos.setVisible(false);
-        SidebarAdmin.selecProveedor.setVisible(false);
-        SidebarAdmin.selecComprasVentas.setVisible(false);
+        if(Login.id_rol == 1) {
+            Dashboard Dashboard = new Dashboard();
+
+            Dashboard.setSize(new Dimension(970, 620));
+            Dashboard.setLocation(0,0);
+            this.PanelPrincipal.removeAll();
+            this.PanelPrincipal.add(Dashboard,BorderLayout.CENTER);
+            this.PanelPrincipal.revalidate();
+            this.PanelPrincipal.repaint();
+
+            this.selecBienvenido.setVisible(true);
+            SidebarAdmin.selecTrabajador.setVisible(false);
+            SidebarAdmin.selecUsuario.setVisible(false);
+            SidebarAdmin.selecProductos.setVisible(false);
+            SidebarAdmin.selecProveedor.setVisible(false);
+            SidebarAdmin.selecComprasVentas.setVisible(false);
+        }
     }//GEN-LAST:event_btnBienvenidoMouseClicked
 
     private void btnBienvenidoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBienvenidoMouseEntered
-        lblBienvenido.setVisible(false);
-        lblBienvenidoHover.setVisible(true);
+        if(Login.id_rol == 1) {
+            lblBienvenido.setVisible(false);
+            lblBienvenidoHover.setVisible(true);
+        }
     }//GEN-LAST:event_btnBienvenidoMouseEntered
 
     private void btnBienvenidoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBienvenidoMouseExited
-        lblBienvenido.setVisible(true);
-        lblBienvenidoHover.setVisible(false);
+        if(Login.id_rol == 1) {
+            lblBienvenido.setVisible(true);
+            lblBienvenidoHover.setVisible(false);
+        }
     }//GEN-LAST:event_btnBienvenidoMouseExited
 
     /**

@@ -2,10 +2,31 @@
 package Vista;
 
 import Consultas.compraConsulta;
+import Consultas.proveedorConsulta;
+import Consultas.trabajadorConsulta;
+import Modelo.proveedor;
+import Modelo.trabajador;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.Font;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -14,12 +35,227 @@ import javax.swing.table.TableColumn;
 public class Compras extends javax.swing.JPanel {
     
     DefaultTableModel m = new DefaultTableModel();
+    
+    Modelo.proveedor proveedor = new proveedor();
+    Modelo.trabajador trabajador = new trabajador();
+    
     compraConsulta compraConsulta = new compraConsulta();
+    Consultas.proveedorConsulta proveedorConsulta = new proveedorConsulta();
+    Consultas.trabajadorConsulta trabajadorConsulta = new trabajadorConsulta();
 
     public Compras() {
         initComponents();
         mostrarCompras();
     }
+    
+    
+    //Generamos el Numero del recibo
+    String generarReciNum(int id_compra){
+        String numRe = "COMP" + compraConsulta.generarNum(id_compra);
+        return numRe;
+    }
+    
+    void imprimir_pdf(){
+        int fila = tablaCompras.getSelectedRow();
+        if(fila == -1){
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        }else{
+            int id_compra = Integer.parseInt(tablaCompras.getValueAt(fila, 0).toString());
+            String nombreBoleta = generarReciNum(id_compra);
+            File path = new File(nombreBoleta+ ".pdf");
+            
+            int id_proveedor = compraConsulta.buscarproveedor(id_compra);
+            proveedor = proveedorConsulta.datosProveedorID(id_proveedor);
+            int id_trababador = Login.id_trabajador;
+            trabajador = trabajadorConsulta.datosTrabajadorID(id_trababador);
+
+            String fecha = tablaCompras.getValueAt(fila, 2).toString();
+            String celular = proveedor.getProveedor_celular();
+            String nombreProveedor = tablaCompras.getValueAt(fila, 1).toString();
+            String nombreTrabajador = trabajador.getTrabajador_nombre_completo();
+            String dir = proveedor.getProveedor_direccion();
+            double total = Double.parseDouble(tablaCompras.getValueAt(fila, 3).toString());
+
+            try {
+                generar_pdf(nombreBoleta, fecha, celular, nombreProveedor, nombreTrabajador, dir, total, id_compra);
+            } catch (FileNotFoundException ex) {
+                System.out.println("Error 1 de pdf FileNotFoundException> ");
+            } catch (DocumentException ex) {
+                System.out.println("Error 2 de pdf DocumentException> ");
+            }
+
+            ImageIcon icon = new ImageIcon("src/Image/IconDocConf.png");
+            JOptionPane.showMessageDialog(null, "Generando Recibo de Compra", "¡Abriendo!",JOptionPane.WARNING_MESSAGE, icon);
+
+            abrirPDF(nombreBoleta);
+            
+        }
+        
+    }
+    
+    //metodo que me abre el pdf generado
+    public void abrirPDF(String codigo){
+        try {
+            String nombreArchivo = codigo + ".pdf";
+
+            // Obtenemos la ubicación actual del proyecto
+            String ubicacionProyecto = Paths.get("").toAbsolutePath().toString();
+
+            // Ruta completa del archivo PDF
+            String rutaCompleta = Paths.get(ubicacionProyecto, "PDF_Compras", nombreArchivo).toString();
+
+            File path = new File(rutaCompleta);
+            Desktop.getDesktop().open(path);
+        } catch (Exception e) {
+            System.out.println("Error al abrir el pdf " + e);
+        }
+    }
+    
+    //metodo que me crea un pdf del recibo
+    public void generar_pdf(String codigo, String fecha, String celular, String nombreProveedor, String nombreTrabajador, String dir, double total, int id_compra) throws FileNotFoundException, DocumentException {
+        String nombreArchivo = codigo + ".pdf";
+        String rutaCarpetaVentas = "PDF_Compras";
+        
+        // Obtenemos la ubicación actual del proyecto
+        String ubicacionProyecto = Paths.get("").toAbsolutePath().toString();
+
+        // Creamos la carpeta "Ventas" en la ubicación del proyecto si no existe
+        File carpetaVentas = new File(ubicacionProyecto, rutaCarpetaVentas);
+        if (!carpetaVentas.exists()) {
+            carpetaVentas.mkdirs();
+        }
+
+        // Ruta completa del archivo en la carpeta "Ventas"
+        String rutaCompleta = Paths.get(ubicacionProyecto, rutaCarpetaVentas, nombreArchivo).toString();
+        FileOutputStream archivo = new FileOutputStream(rutaCompleta);
+
+        Document documento = new Document() ;
+        PdfWriter.getInstance(documento, archivo);
+        documento.open();
+                
+        try {
+            Font negrita1 = new Font(Font.FontFamily.HELVETICA,14,Font.BOLD,BaseColor.BLACK);
+            Font negrita2 = new Font(Font.FontFamily.HELVETICA,22,Font.BOLD,BaseColor.BLACK);
+            Font negrita3 = new Font(Font.FontFamily.HELVETICA,12,Font.BOLD,BaseColor.BLACK);
+            Font negrita4 = new Font(Font.FontFamily.HELVETICA,12,Font.BOLD,BaseColor.WHITE);
+            
+            
+            PdfPTable encabezado = new PdfPTable(1);
+            encabezado.setWidthPercentage(100);
+            encabezado.getDefaultCell().setBorder(0);
+            float[] clumnasEncabezado = new float[]{100f};
+            encabezado.setWidths(clumnasEncabezado);
+            encabezado.setHorizontalAlignment(Element.ALIGN_CENTER);
+            
+            
+            Paragraph parrafo = new Paragraph(nombreProveedor,negrita2);
+            parrafo.setAlignment(1);
+            documento.add(parrafo);
+            Paragraph parrafo2 = new Paragraph("Proveedores de Ferreteria José Mori E.I.R.L.",negrita1);
+            parrafo2.setAlignment(1);
+            documento.add(parrafo2);
+            
+            Paragraph linea1 = new Paragraph("\n                                                                                    ________________________",negrita1);
+            documento.add(linea1);
+            Paragraph titulo3 = new Paragraph("\n                                                                                   R.U.C. N° 1234567890",negrita1);
+            titulo3.setAlignment(1);
+            documento.add(titulo3);
+            Paragraph titulo = new Paragraph("                                                                                   Boleta de Pago Electrónico",negrita1);
+            titulo.setAlignment(1);
+            documento.add(titulo);
+            Paragraph titulo2 = new Paragraph("                                                                                   " + codigo, negrita1);
+            titulo2.setAlignment(1);
+            documento.add(titulo2);
+            Paragraph linea2 = new Paragraph("                                                                                    ________________________",negrita1);
+            documento.add(linea2);
+            
+            //datos de la empresa
+            documento.add(new Paragraph("\n\n"));
+            PdfPTable tablaEmpresa = new PdfPTable(2);
+            tablaEmpresa.setWidthPercentage(100);
+            tablaEmpresa.getDefaultCell().setBorder(0);
+            float[] clumnasE = new float[]{55f,100f};
+            tablaEmpresa.setWidths(clumnasE);
+            tablaEmpresa.setHorizontalAlignment(Element.ALIGN_CENTER);
+            PdfPCell pEmp1 = new  PdfPCell(new Phrase(" ",negrita4));
+            PdfPCell pEmp2 = new  PdfPCell(new Phrase(nombreProveedor,negrita4));
+            pEmp1.setBorder(0);
+            pEmp2.setBorder(0);
+            pEmp1.setBackgroundColor(BaseColor.GRAY);
+            pEmp2.setBackgroundColor(BaseColor.GRAY);
+            tablaEmpresa.addCell(pEmp1);
+            tablaEmpresa.addCell(pEmp2);
+            documento.add(tablaEmpresa);
+            
+            documento.add(new Paragraph("Fecha:           " + fecha + "                                    Proveedor:           "+nombreProveedor));
+            documento.add(new Paragraph("Celular:         "+celular+"                                     Direccion:         "+dir));
+            
+            //datos del cliente
+            documento.add(new Paragraph("\n______________________________________________________________________________"));
+            documento.add(new Paragraph("Cliente:          Ferreteria José Mori E.I.R.L"));
+            documento.add(new Paragraph("Celular:           999999999                                      Direccion:         Av. Curimaná #69"));
+            
+            Paragraph titulo5 = new Paragraph("\nDetalles de la Compra",negrita1);
+            titulo5.setAlignment(1);
+            documento.add(titulo5);
+            
+            //prodcutos
+            documento.add(new Paragraph("\n"));
+            PdfPTable tablaP = new PdfPTable(4);
+            tablaP.setWidthPercentage(100);
+            tablaP.getDefaultCell().setBorder(0);
+            float[] clumnasP = new float[]{15f, 60f, 20f, 20f};
+            tablaP.setWidths(clumnasP);
+            tablaP.setHorizontalAlignment(Element.ALIGN_LEFT);
+            PdfPCell p1 = new  PdfPCell(new Phrase("N° ",negrita4));
+            PdfPCell p2 = new  PdfPCell(new Phrase("Descripción",negrita4));
+            PdfPCell p3 = new  PdfPCell(new Phrase("Cantidad",negrita4));
+            PdfPCell p4 = new  PdfPCell(new Phrase("Importe",negrita4));
+            p1.setBorder(0);
+            p2.setBorder(0);
+            p3.setBorder(0);
+            p4.setBorder(0);
+            p1.setBackgroundColor(BaseColor.DARK_GRAY);
+            p2.setBackgroundColor(BaseColor.DARK_GRAY);
+            p3.setBackgroundColor(BaseColor.DARK_GRAY);
+            p4.setBackgroundColor(BaseColor.DARK_GRAY);
+            tablaP.addCell(p1);
+            tablaP.addCell(p2);
+            tablaP.addCell(p3);
+            tablaP.addCell(p4);
+            
+            Object[][] datos = compraConsulta.obtenerDatosDetalle(id_compra);
+            
+            for(int i=0;i<datos.length;i++){
+                String nro = String.valueOf(i + 1);
+                String des = String.valueOf(datos[i][0]);
+                String cantidad = String.valueOf(datos[i][1]);
+                String importe = String.format("%.2f", Double.parseDouble(datos[i][2].toString()));
+
+                tablaP.addCell(nro);
+                tablaP.addCell(des);
+                tablaP.addCell(cantidad);
+                tablaP.addCell(importe);
+            }
+            
+            documento.add(tablaP);
+            
+            //pago
+            documento.add(new Paragraph("______________________________________________________________________________"));
+            documento.add(new Paragraph("                                                                                                       Pago:            S/. " + String.format("%.2f", total)));
+            
+            Paragraph finall = new Paragraph("\n\n\nAgradecemos su compra. ¡Su satisfacción es nuestra mayor recompensa!", negrita3);
+            finall.setAlignment(Element.ALIGN_CENTER);
+            documento.add(finall);
+            
+        } catch (BadElementException ex) {
+            System.out.println("" + ex);
+        }
+        documento.close();
+        
+    }
+    
+    
     
     void mostrarCompras(){
         try {
@@ -27,8 +263,6 @@ public class Compras extends javax.swing.JPanel {
             tablaCompras.setModel(m);
 
             JTableHeader header = tablaCompras.getTableHeader();
-            Font font = header.getFont();
-            header.setFont(font.deriveFont(Font.BOLD, 14f));
             
             TableColumn t1 = tablaCompras.getColumn("ID");
             t1.setPreferredWidth(50);
@@ -80,6 +314,8 @@ public class Compras extends javax.swing.JPanel {
         nuevo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCompras = new javax.swing.JTable();
+        btnPDF = new javax.swing.JPanel();
+        pdf = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -201,6 +437,7 @@ public class Compras extends javax.swing.JPanel {
         lblTitulo.setMinimumSize(new java.awt.Dimension(210, 28));
         lblTitulo.setPreferredSize(new java.awt.Dimension(210, 28));
 
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevo.setMaximumSize(new java.awt.Dimension(100, 42));
         btnNuevo.setMinimumSize(new java.awt.Dimension(100, 42));
 
@@ -242,6 +479,29 @@ public class Compras extends javax.swing.JPanel {
         tablaCompras.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaCompras);
 
+        btnPDF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPDF.setMaximumSize(new java.awt.Dimension(100, 42));
+        btnPDF.setMinimumSize(new java.awt.Dimension(100, 42));
+        btnPDF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPDFMouseClicked(evt);
+            }
+        });
+
+        pdf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/btnPDF.png"))); // NOI18N
+        pdf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout btnPDFLayout = new javax.swing.GroupLayout(btnPDF);
+        btnPDF.setLayout(btnPDFLayout);
+        btnPDFLayout.setHorizontalGroup(
+            btnPDFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pdf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        btnPDFLayout.setVerticalGroup(
+            btnPDFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pdf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -255,7 +515,10 @@ public class Compras extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(80, 80, 80))
         );
         layout.setVerticalGroup(
@@ -265,7 +528,9 @@ public class Compras extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
@@ -304,12 +569,17 @@ public class Compras extends javax.swing.JPanel {
         btnVentas.setBackground(new Color(53, 66, 89));
     }//GEN-LAST:event_btnVentasMouseExited
 
+    private void btnPDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPDFMouseClicked
+        imprimir_pdf();
+    }//GEN-LAST:event_btnPDFMouseClicked
+
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCompras;
     private javax.swing.JPanel btnNuevo;
+    private javax.swing.JPanel btnPDF;
     private javax.swing.JPanel btnVentas;
     private javax.swing.JPanel jPanel6;
     public static javax.swing.JScrollPane jScrollPane1;
@@ -317,6 +587,7 @@ public class Compras extends javax.swing.JPanel {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblVentas;
     private javax.swing.JLabel nuevo;
+    private javax.swing.JLabel pdf;
     public static javax.swing.JTable tablaCompras;
     // End of variables declaration//GEN-END:variables
 }

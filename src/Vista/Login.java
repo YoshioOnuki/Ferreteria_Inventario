@@ -27,7 +27,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("Inventario de Ferreteria Mori");
+        this.setTitle("Inventario de Ferreteria José Mori");
         this.setIconImage(new ImageIcon(getClass().getResource("/Image/Logo.png")).getImage());
         placeholder();
         txtUsuario.setText("admin");

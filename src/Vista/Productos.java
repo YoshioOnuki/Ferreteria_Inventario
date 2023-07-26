@@ -22,6 +22,21 @@ public class Productos extends javax.swing.JPanel {
     public Productos() {
         initComponents();
         mostrarProductos();
+        mostrarBotones();
+    }
+    
+    void mostrarBotones(){
+        if(Login.id_rol == 2){
+            btnNuevo.setVisible(false);
+            nuevo.setVisible(false);
+            btnEditar.setVisible(false);
+            editar.setVisible(false);
+        }else{
+            btnNuevo.setVisible(true);
+            nuevo.setVisible(true);
+            btnEditar.setVisible(true);
+            editar.setVisible(true);
+        }
     }
     
     void editar(){
